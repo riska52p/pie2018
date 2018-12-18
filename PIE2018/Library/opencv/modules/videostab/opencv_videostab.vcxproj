@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AB44CEB2-5DCE-3E19-80D9-648F0F30F823}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>opencv_videostab</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Software Download\Library\opencv_\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">opencv_videostab.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">opencv_videostab344d</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Software Download\Library\opencv_\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">opencv_videostab.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">opencv_videostab344</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv-3.4.4\modules\videostab\src;D:\Software Download\Library\opencv-3.4.4\modules\videostab\include;D:\Software Download\Library\opencv_\modules\videostab;D:\Software Download\Library\opencv-3.4.4\modules\core\include;D:\Software Download\Library\opencv-3.4.4\modules\flann\include;D:\Software Download\Library\opencv-3.4.4\modules\imgproc\include;D:\Software Download\Library\opencv-3.4.4\modules\photo\include;D:\Software Download\Library\opencv-3.4.4\modules\video\include;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\include;D:\Software Download\Library\opencv-3.4.4\modules\videoio\include;D:\Software Download\Library\opencv-3.4.4\modules\highgui\include;D:\Software Download\Library\opencv-3.4.4\modules\features2d\include;D:\Software Download\Library\opencv-3.4.4\modules\calib3d\include;D:\Software Download\Library\opencv_;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4127;4251;4324;4275;4512;4589</DisableSpecificWarnings>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProcessorNumber>8</ProcessorNumber>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_VARIADIC_MAX=10;__OPENCV_BUILD=1;_USE_MATH_DEFINES;__STDC_CONSTANT_MACROS;__STDC_LIMIT_MACROS;__STDC_FORMAT_MACROS;CMAKE_INTDIR="Debug";CVAPI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>D:\Software Download\Library\opencv_\lib\Debug\opencv_videostab344d.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_VARIADIC_MAX=10;__OPENCV_BUILD=1;_USE_MATH_DEFINES;__STDC_CONSTANT_MACROS;__STDC_LIMIT_MACROS;__STDC_FORMAT_MACROS;CMAKE_INTDIR=\"Debug\";CVAPI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv-3.4.4\modules\videostab\src;D:\Software Download\Library\opencv-3.4.4\modules\videostab\include;D:\Software Download\Library\opencv_\modules\videostab;D:\Software Download\Library\opencv-3.4.4\modules\core\include;D:\Software Download\Library\opencv-3.4.4\modules\flann\include;D:\Software Download\Library\opencv-3.4.4\modules\imgproc\include;D:\Software Download\Library\opencv-3.4.4\modules\photo\include;D:\Software Download\Library\opencv-3.4.4\modules\video\include;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\include;D:\Software Download\Library\opencv-3.4.4\modules\videoio\include;D:\Software Download\Library\opencv-3.4.4\modules\highgui\include;D:\Software Download\Library\opencv-3.4.4\modules\features2d\include;D:\Software Download\Library\opencv-3.4.4\modules\calib3d\include;D:\Software Download\Library\opencv_;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv-3.4.4\modules\videostab\src;D:\Software Download\Library\opencv-3.4.4\modules\videostab\include;D:\Software Download\Library\opencv_\modules\videostab;D:\Software Download\Library\opencv-3.4.4\modules\core\include;D:\Software Download\Library\opencv-3.4.4\modules\flann\include;D:\Software Download\Library\opencv-3.4.4\modules\imgproc\include;D:\Software Download\Library\opencv-3.4.4\modules\photo\include;D:\Software Download\Library\opencv-3.4.4\modules\video\include;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\include;D:\Software Download\Library\opencv-3.4.4\modules\videoio\include;D:\Software Download\Library\opencv-3.4.4\modules\highgui\include;D:\Software Download\Library\opencv-3.4.4\modules\features2d\include;D:\Software Download\Library\opencv-3.4.4\modules\calib3d\include;D:\Software Download\Library\opencv_;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Debug\opencv_photo344d.lib;..\..\lib\Debug\opencv_video344d.lib;..\..\lib\Debug\opencv_calib3d344d.lib;..\..\3rdparty\lib\Debug\ippiwd.lib;..\..\3rdparty\ippicv\ippicv_win\icv\lib\intel64\ippicvmt.lib;..\..\lib\Debug\opencv_features2d344d.lib;..\..\lib\Debug\opencv_flann344d.lib;..\..\lib\Debug\opencv_highgui344d.lib;..\..\lib\Debug\opencv_videoio344d.lib;..\..\lib\Debug\opencv_imgcodecs344d.lib;..\..\lib\Debug\opencv_imgproc344d.lib;..\..\lib\Debug\opencv_core344d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>libc;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Software Download/Library/opencv_/lib/Debug/opencv_videostab344d.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Software Download/Library/opencv_/bin/Debug/opencv_videostab344d.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv-3.4.4\modules\videostab\src;D:\Software Download\Library\opencv-3.4.4\modules\videostab\include;D:\Software Download\Library\opencv_\modules\videostab;D:\Software Download\Library\opencv-3.4.4\modules\core\include;D:\Software Download\Library\opencv-3.4.4\modules\flann\include;D:\Software Download\Library\opencv-3.4.4\modules\imgproc\include;D:\Software Download\Library\opencv-3.4.4\modules\photo\include;D:\Software Download\Library\opencv-3.4.4\modules\video\include;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\include;D:\Software Download\Library\opencv-3.4.4\modules\videoio\include;D:\Software Download\Library\opencv-3.4.4\modules\highgui\include;D:\Software Download\Library\opencv-3.4.4\modules\features2d\include;D:\Software Download\Library\opencv-3.4.4\modules\calib3d\include;D:\Software Download\Library\opencv_;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4127;4251;4324;4275;4512;4589</DisableSpecificWarnings>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProcessorNumber>8</ProcessorNumber>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;NDEBUG;_VARIADIC_MAX=10;__OPENCV_BUILD=1;_USE_MATH_DEFINES;__STDC_CONSTANT_MACROS;__STDC_LIMIT_MACROS;__STDC_FORMAT_MACROS;CMAKE_INTDIR="Release";CVAPI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ProgramDataBaseFileName>D:\Software Download\Library\opencv_\lib\Release\opencv_videostab344.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;NDEBUG;_VARIADIC_MAX=10;__OPENCV_BUILD=1;_USE_MATH_DEFINES;__STDC_CONSTANT_MACROS;__STDC_LIMIT_MACROS;__STDC_FORMAT_MACROS;CMAKE_INTDIR=\"Release\";CVAPI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv-3.4.4\modules\videostab\src;D:\Software Download\Library\opencv-3.4.4\modules\videostab\include;D:\Software Download\Library\opencv_\modules\videostab;D:\Software Download\Library\opencv-3.4.4\modules\core\include;D:\Software Download\Library\opencv-3.4.4\modules\flann\include;D:\Software Download\Library\opencv-3.4.4\modules\imgproc\include;D:\Software Download\Library\opencv-3.4.4\modules\photo\include;D:\Software Download\Library\opencv-3.4.4\modules\video\include;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\include;D:\Software Download\Library\opencv-3.4.4\modules\videoio\include;D:\Software Download\Library\opencv-3.4.4\modules\highgui\include;D:\Software Download\Library\opencv-3.4.4\modules\features2d\include;D:\Software Download\Library\opencv-3.4.4\modules\calib3d\include;D:\Software Download\Library\opencv_;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv-3.4.4\modules\videostab\src;D:\Software Download\Library\opencv-3.4.4\modules\videostab\include;D:\Software Download\Library\opencv_\modules\videostab;D:\Software Download\Library\opencv-3.4.4\modules\core\include;D:\Software Download\Library\opencv-3.4.4\modules\flann\include;D:\Software Download\Library\opencv-3.4.4\modules\imgproc\include;D:\Software Download\Library\opencv-3.4.4\modules\photo\include;D:\Software Download\Library\opencv-3.4.4\modules\video\include;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\include;D:\Software Download\Library\opencv-3.4.4\modules\videoio\include;D:\Software Download\Library\opencv-3.4.4\modules\highgui\include;D:\Software Download\Library\opencv-3.4.4\modules\features2d\include;D:\Software Download\Library\opencv-3.4.4\modules\calib3d\include;D:\Software Download\Library\opencv_;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Release\opencv_photo344.lib;..\..\lib\Release\opencv_video344.lib;..\..\lib\Release\opencv_calib3d344.lib;..\..\3rdparty\lib\Release\ippiw.lib;..\..\3rdparty\ippicv\ippicv_win\icv\lib\intel64\ippicvmt.lib;..\..\lib\Release\opencv_features2d344.lib;..\..\lib\Release\opencv_flann344.lib;..\..\lib\Release\opencv_highgui344.lib;..\..\lib\Release\opencv_videoio344.lib;..\..\lib\Release\opencv_imgcodecs344.lib;..\..\lib\Release\opencv_imgproc344.lib;..\..\lib\Release\opencv_core344.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>libc;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Software Download/Library/opencv_/lib/Release/opencv_videostab344.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Software Download/Library/opencv_/bin/Release/opencv_videostab344.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Software Download/Library/opencv-3.4.4/modules/videostab/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Software Download/Library/opencv-3.4.4" "-BD:/Software Download/Library/opencv_" --check-stamp-file "D:/Software Download/Library/opencv_/modules/videostab/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\cmake\templates\dllmain.cpp.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\vs_version.rc.in;D:\Software Download\Library\opencv-3.4.4\modules\videostab\CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\modules\videostab\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Software Download\Library\opencv_\modules\videostab\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Software Download/Library/opencv-3.4.4/modules/videostab/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Software Download/Library/opencv-3.4.4" "-BD:/Software Download/Library/opencv_" --check-stamp-file "D:/Software Download/Library/opencv_/modules/videostab/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\cmake\templates\dllmain.cpp.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\vs_version.rc.in;D:\Software Download\Library\opencv-3.4.4\modules\videostab\CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\modules\videostab\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Software Download\Library\opencv_\modules\videostab\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\deblurring.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\fast_marching.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\fast_marching_inl.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\frame_source.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\global_motion.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\inpainting.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\log.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\motion_core.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\motion_stabilizing.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\optical_flow.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\outlier_rejection.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\ring_buffer.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\stabilizer.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\include\opencv2\videostab\wobble_suppression.hpp" />
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\deblurring.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\fast_marching.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\frame_source.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\global_motion.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\inpainting.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\log.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\motion_stabilizing.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\optical_flow.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\outlier_rejection.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\stabilizer.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\wobble_suppression.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\clp.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\videostab\src\precomp.hpp" />
+    <ClInclude Include="D:\Software Download\Library\opencv_\cvconfig.h" />
+    <ClInclude Include="D:\Software Download\Library\opencv_\opencv2\opencv_modules.hpp" />
+    <ClCompile Include="D:\Software Download\Library\opencv_\modules\videostab\opencv_videostab_pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ResourceCompile Include="D:\Software Download\Library\opencv_\modules\videostab\vs_version.rc" />
+    <ClCompile Include="D:\Software Download\Library\opencv_\modules\videostab\opencv_videostab_main.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/videostab/src/precomp.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\ZERO_CHECK.vcxproj">
+      <Project>{A68F271E-AA2B-330A-B5F5-1C0533DB9477}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\ippiw\ippiw.vcxproj">
+      <Project>{E0200408-AFF2-346A-8786-2BCFB5F4812F}</Project>
+      <Name>ippiw</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\calib3d\opencv_calib3d.vcxproj">
+      <Project>{12033349-0535-316E-B553-2789EFFF2D56}</Project>
+      <Name>opencv_calib3d</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_core.vcxproj">
+      <Project>{BEF61172-582A-3A5D-9FBB-756E12B2A2C7}</Project>
+      <Name>opencv_core</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\features2d\opencv_features2d.vcxproj">
+      <Project>{4CCA05B9-A640-327C-B509-111878BA12BB}</Project>
+      <Name>opencv_features2d</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\flann\opencv_flann.vcxproj">
+      <Project>{DD9F9827-A0F2-3C9D-9572-9B6A7B41DC0A}</Project>
+      <Name>opencv_flann</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\highgui\opencv_highgui.vcxproj">
+      <Project>{D0F3A4BC-ED43-387D-9D98-9DE48DCC19CF}</Project>
+      <Name>opencv_highgui</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgcodecs\opencv_imgcodecs.vcxproj">
+      <Project>{B419591A-8F67-3CBC-9766-B7DB8F0D7B4F}</Project>
+      <Name>opencv_imgcodecs</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgproc\opencv_imgproc.vcxproj">
+      <Project>{07053084-F112-3279-8E43-FF575EF655C1}</Project>
+      <Name>opencv_imgproc</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\photo\opencv_photo.vcxproj">
+      <Project>{0E7213CC-5352-3D45-958B-80F27EF86580}</Project>
+      <Name>opencv_photo</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\video\opencv_video.vcxproj">
+      <Project>{383AFF7D-5C7B-3F93-902D-D1F19C07C09F}</Project>
+      <Name>opencv_video</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\videoio\opencv_videoio.vcxproj">
+      <Project>{BD3B91C4-6A4C-3560-9A00-7B8CABD43B23}</Project>
+      <Name>opencv_videoio</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

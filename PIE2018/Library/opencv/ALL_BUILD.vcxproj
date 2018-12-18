@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B137DDF7-1CEA-36CE-8E4C-F03D7BCF36A6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv_;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv_;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Software Download\Library\opencv-3.4.4\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Software Download/Library/opencv-3.4.4/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Software Download/Library/opencv-3.4.4" "-BD:/Software Download/Library/opencv_" --check-stamp-file "D:/Software Download/Library/opencv_/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeFindJavaCommon.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckFortranFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindBLAS.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindJNI.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindLAPACK.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\ProcessorCount.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.13\Templates\CPackConfig.cmake.in;D:\Software Download\Library\opencv-3.4.4\3rdparty\ffmpeg\ffmpeg.cmake;D:\Software Download\Library\opencv-3.4.4\3rdparty\ippicv\ippicv.cmake;D:\Software Download\Library\opencv-3.4.4\CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\cmake\FindGstreamerWindows.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVCRTLinkage.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVCompilerOptimizations.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVCompilerOptions.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectApacheAnt.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectCXXCompiler.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectDirectX.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectOpenCL.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectPython.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectTrace.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectVTK.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDownload.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVExtraTargets.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindFrameworks.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindIPP.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindIPPIW.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLAPACK.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLibsGUI.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLibsGrfmt.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLibsPerf.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLibsVideo.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindMKL.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindOpenBLAS.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindProtobuf.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenABI.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenAndroidMK.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenConfig.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenHeaders.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenSetupVars.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVMinDepVersions.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVModule.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVPCHSupport.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVPackaging.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVUtils.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVVersion.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\checks\directx.cpp;D:\Software Download\Library\opencv-3.4.4\cmake\checks\opencl.cpp;D:\Software Download\Library\opencv-3.4.4\cmake\checks\win32uitest.cpp;D:\Software Download\Library\opencv-3.4.4\cmake\templates\OpenCVConfig-version.cmake.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\OpenCVConfig.cmake.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\OpenCVConfig.root-WIN32.cmake.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\cmake_uninstall.cmake.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\custom_hal.hpp.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\cv_cpu_config.h.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\cvconfig.h.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\opencv_modules.hpp.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\setup_vars_win32.cmd.in;D:\Software Download\Library\opencv-3.4.4\modules\core\include\opencv2\core\version.hpp;D:\Software Download\Library\opencv_\3rdparty\ffmpeg\ffmpeg_version.cmake;D:\Software Download\Library\opencv_\CMakeFiles\3.13.2\CMakeCCompiler.cmake;D:\Software Download\Library\opencv_\CMakeFiles\3.13.2\CMakeCXXCompiler.cmake;D:\Software Download\Library\opencv_\CMakeFiles\3.13.2\CMakeRCCompiler.cmake;D:\Software Download\Library\opencv_\CMakeFiles\3.13.2\CMakeSystem.cmake;D:\Software Download\Library\opencv-3.4.4\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Software Download\Library\opencv_\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Software Download/Library/opencv-3.4.4/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Software Download/Library/opencv-3.4.4" "-BD:/Software Download/Library/opencv_" --check-stamp-file "D:/Software Download/Library/opencv_/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeFindJavaCommon.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckFortranFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindBLAS.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindJNI.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindLAPACK.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\ProcessorCount.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.13\Templates\CPackConfig.cmake.in;D:\Software Download\Library\opencv-3.4.4\3rdparty\ffmpeg\ffmpeg.cmake;D:\Software Download\Library\opencv-3.4.4\3rdparty\ippicv\ippicv.cmake;D:\Software Download\Library\opencv-3.4.4\CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\cmake\FindGstreamerWindows.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVCRTLinkage.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVCompilerOptimizations.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVCompilerOptions.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectApacheAnt.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectCXXCompiler.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectDirectX.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectOpenCL.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectPython.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectTrace.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDetectVTK.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVDownload.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVExtraTargets.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindFrameworks.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindIPP.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindIPPIW.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLAPACK.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLibsGUI.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLibsGrfmt.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLibsPerf.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindLibsVideo.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindMKL.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindOpenBLAS.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVFindProtobuf.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenABI.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenAndroidMK.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenConfig.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenHeaders.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVGenSetupVars.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVMinDepVersions.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVModule.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVPCHSupport.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVPackaging.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVUtils.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\OpenCVVersion.cmake;D:\Software Download\Library\opencv-3.4.4\cmake\checks\directx.cpp;D:\Software Download\Library\opencv-3.4.4\cmake\checks\opencl.cpp;D:\Software Download\Library\opencv-3.4.4\cmake\checks\win32uitest.cpp;D:\Software Download\Library\opencv-3.4.4\cmake\templates\OpenCVConfig-version.cmake.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\OpenCVConfig.cmake.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\OpenCVConfig.root-WIN32.cmake.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\cmake_uninstall.cmake.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\custom_hal.hpp.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\cv_cpu_config.h.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\cvconfig.h.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\opencv_modules.hpp.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\setup_vars_win32.cmd.in;D:\Software Download\Library\opencv-3.4.4\modules\core\include\opencv2\core\version.hpp;D:\Software Download\Library\opencv_\3rdparty\ffmpeg\ffmpeg_version.cmake;D:\Software Download\Library\opencv_\CMakeFiles\3.13.2\CMakeCCompiler.cmake;D:\Software Download\Library\opencv_\CMakeFiles\3.13.2\CMakeCXXCompiler.cmake;D:\Software Download\Library\opencv_\CMakeFiles\3.13.2\CMakeRCCompiler.cmake;D:\Software Download\Library\opencv_\CMakeFiles\3.13.2\CMakeSystem.cmake;D:\Software Download\Library\opencv-3.4.4\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Software Download\Library\opencv_\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\ZERO_CHECK.vcxproj">
+      <Project>{A68F271E-AA2B-330A-B5F5-1C0533DB9477}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\openexr\IlmImf.vcxproj">
+      <Project>{64F32FE7-955B-37EF-ABD1-AAE46DA06BE9}</Project>
+      <Name>IlmImf</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\ippiw\ippiw.vcxproj">
+      <Project>{E0200408-AFF2-346A-8786-2BCFB5F4812F}</Project>
+      <Name>ippiw</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\ittnotify\ittnotify.vcxproj">
+      <Project>{F73148AC-0B8A-3E7B-881D-27EC27F1FA20}</Project>
+      <Name>ittnotify</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\libjasper\libjasper.vcxproj">
+      <Project>{9C0CCA0E-D9A1-34F5-B1A1-4E42599D21CA}</Project>
+      <Name>libjasper</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\libjpeg-turbo\libjpeg-turbo.vcxproj">
+      <Project>{A773E1F6-A0DA-3D0A-9E6C-D6089A161005}</Project>
+      <Name>libjpeg-turbo</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\libpng\libpng.vcxproj">
+      <Project>{58DCB7ED-BF93-3886-8400-BCCD77A7BFC4}</Project>
+      <Name>libpng</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\protobuf\libprotobuf.vcxproj">
+      <Project>{E3140B04-1792-33FD-B18D-725EC27A416B}</Project>
+      <Name>libprotobuf</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\libtiff\libtiff.vcxproj">
+      <Project>{04106B3E-DFC8-3270-B073-3FB425582A11}</Project>
+      <Name>libtiff</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\libwebp\libwebp.vcxproj">
+      <Project>{071A1F83-2485-37A0-AC70-15232575B812}</Project>
+      <Name>libwebp</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\apps\annotation\opencv_annotation.vcxproj">
+      <Project>{EB7F6625-1AF9-3C51-AEB6-18991838E392}</Project>
+      <Name>opencv_annotation</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\calib3d\opencv_calib3d.vcxproj">
+      <Project>{12033349-0535-316E-B553-2789EFFF2D56}</Project>
+      <Name>opencv_calib3d</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_core.vcxproj">
+      <Project>{BEF61172-582A-3A5D-9FBB-756E12B2A2C7}</Project>
+      <Name>opencv_core</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_core_AVX.vcxproj">
+      <Project>{8AE953FE-F48F-3B0B-95B8-48E2BC2B28D1}</Project>
+      <Name>opencv_core_AVX</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_core_AVX2.vcxproj">
+      <Project>{A677D415-B40E-3C19-BC02-D2F337E62239}</Project>
+      <Name>opencv_core_AVX2</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_core_SSE4_1.vcxproj">
+      <Project>{06782147-FBF1-3E30-A82B-2FCD1385244B}</Project>
+      <Name>opencv_core_SSE4_1</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_core_SSE4_2.vcxproj">
+      <Project>{5FD7465D-A023-3B0D-98CD-B01DD6D627D7}</Project>
+      <Name>opencv_core_SSE4_2</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\apps\createsamples\opencv_createsamples.vcxproj">
+      <Project>{E7C9B06E-F901-3FD1-B138-6754DBAE6932}</Project>
+      <Name>opencv_createsamples</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\dnn\opencv_dnn.vcxproj">
+      <Project>{F2FB708B-724D-3A88-B62A-D5CFD732D502}</Project>
+      <Name>opencv_dnn</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\dnn\opencv_dnn_AVX.vcxproj">
+      <Project>{97F9FB65-A358-365E-B69B-999CBD4D0FFF}</Project>
+      <Name>opencv_dnn_AVX</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\dnn\opencv_dnn_AVX2.vcxproj">
+      <Project>{34FA5B2C-12BE-38DC-BF5B-28F0823CF436}</Project>
+      <Name>opencv_dnn_AVX2</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\features2d\opencv_features2d.vcxproj">
+      <Project>{4CCA05B9-A640-327C-B509-111878BA12BB}</Project>
+      <Name>opencv_features2d</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\features2d\opencv_features2d_AVX2.vcxproj">
+      <Project>{C49F39D2-6AEA-37FD-8211-4C818DAC4338}</Project>
+      <Name>opencv_features2d_AVX2</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\flann\opencv_flann.vcxproj">
+      <Project>{DD9F9827-A0F2-3C9D-9572-9B6A7B41DC0A}</Project>
+      <Name>opencv_flann</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\highgui\opencv_highgui.vcxproj">
+      <Project>{D0F3A4BC-ED43-387D-9D98-9DE48DCC19CF}</Project>
+      <Name>opencv_highgui</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgcodecs\opencv_imgcodecs.vcxproj">
+      <Project>{B419591A-8F67-3CBC-9766-B7DB8F0D7B4F}</Project>
+      <Name>opencv_imgcodecs</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgproc\opencv_imgproc.vcxproj">
+      <Project>{07053084-F112-3279-8E43-FF575EF655C1}</Project>
+      <Name>opencv_imgproc</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgproc\opencv_imgproc_AVX.vcxproj">
+      <Project>{ABE129F6-1022-35CD-B6E5-7021C2C6B0AA}</Project>
+      <Name>opencv_imgproc_AVX</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgproc\opencv_imgproc_AVX2.vcxproj">
+      <Project>{D3E3FC18-C260-3AB1-860B-FCCB40D034FF}</Project>
+      <Name>opencv_imgproc_AVX2</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgproc\opencv_imgproc_SSE4_1.vcxproj">
+      <Project>{30A9BF07-AF88-33AB-9E98-870C69A120E2}</Project>
+      <Name>opencv_imgproc_SSE4_1</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\apps\interactive-calibration\opencv_interactive-calibration.vcxproj">
+      <Project>{719E4201-DA37-33A8-AB1A-AFF1E29860B5}</Project>
+      <Name>opencv_interactive-calibration</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\ml\opencv_ml.vcxproj">
+      <Project>{2E81C44D-8292-395B-878E-453D760CB66E}</Project>
+      <Name>opencv_ml</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\objdetect\opencv_objdetect.vcxproj">
+      <Project>{3B96A454-957E-3DA4-BB85-3E62510EAC91}</Project>
+      <Name>opencv_objdetect</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\objdetect\opencv_objdetect_AVX.vcxproj">
+      <Project>{B41EA90F-1551-30FB-9892-6C18A4011618}</Project>
+      <Name>opencv_objdetect_AVX</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\calib3d\opencv_perf_calib3d.vcxproj">
+      <Project>{100DB114-AF91-3C8C-907C-40DAF3F89377}</Project>
+      <Name>opencv_perf_calib3d</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_perf_core.vcxproj">
+      <Project>{FE5B1F11-6B6B-3C23-8C9A-34195AD7E720}</Project>
+      <Name>opencv_perf_core</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\dnn\opencv_perf_dnn.vcxproj">
+      <Project>{941522F0-C945-3761-993F-D23D6D809766}</Project>
+      <Name>opencv_perf_dnn</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\features2d\opencv_perf_features2d.vcxproj">
+      <Project>{0428F740-64AC-3EFB-84B1-6F365C3909DF}</Project>
+      <Name>opencv_perf_features2d</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgcodecs\opencv_perf_imgcodecs.vcxproj">
+      <Project>{E7309AEE-6538-39BD-A0AE-5E741D95D80E}</Project>
+      <Name>opencv_perf_imgcodecs</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgproc\opencv_perf_imgproc.vcxproj">
+      <Project>{EF3D2BEC-28D5-3DD4-82FC-A8FA26305438}</Project>
+      <Name>opencv_perf_imgproc</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\objdetect\opencv_perf_objdetect.vcxproj">
+      <Project>{44AA4656-2CCF-3B2E-9ABD-F0379D7EFEF4}</Project>
+      <Name>opencv_perf_objdetect</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\photo\opencv_perf_photo.vcxproj">
+      <Project>{211A21F1-80B3-36A8-92AA-4ABDBECA9162}</Project>
+      <Name>opencv_perf_photo</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\stitching\opencv_perf_stitching.vcxproj">
+      <Project>{1531E983-E829-3D73-8908-CD16B947EA17}</Project>
+      <Name>opencv_perf_stitching</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\superres\opencv_perf_superres.vcxproj">
+      <Project>{D6C2922A-DDB4-34BE-8A7C-B2D7EF55AD8E}</Project>
+      <Name>opencv_perf_superres</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\video\opencv_perf_video.vcxproj">
+      <Project>{10977D12-F2B1-3BF0-BB16-2377CF6C66B2}</Project>
+      <Name>opencv_perf_video</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\videoio\opencv_perf_videoio.vcxproj">
+      <Project>{3B62F9E5-66FC-3DD6-AD16-566531835468}</Project>
+      <Name>opencv_perf_videoio</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\photo\opencv_photo.vcxproj">
+      <Project>{0E7213CC-5352-3D45-958B-80F27EF86580}</Project>
+      <Name>opencv_photo</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\python3\opencv_python3.vcxproj">
+      <Project>{5ECE2A53-6302-3C1D-B514-CF83BB4B6E13}</Project>
+      <Name>opencv_python3</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\shape\opencv_shape.vcxproj">
+      <Project>{B6218D00-FF03-38BF-9983-116B81948BF6}</Project>
+      <Name>opencv_shape</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\stitching\opencv_stitching.vcxproj">
+      <Project>{C106722C-8B0D-3F5F-839E-ED13620074DA}</Project>
+      <Name>opencv_stitching</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\superres\opencv_superres.vcxproj">
+      <Project>{713BF0AF-C085-384A-89D0-C382FCA6C1F9}</Project>
+      <Name>opencv_superres</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\calib3d\opencv_test_calib3d.vcxproj">
+      <Project>{F03A1D21-4E63-324E-8B4F-A7ED0CA96C73}</Project>
+      <Name>opencv_test_calib3d</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_test_core.vcxproj">
+      <Project>{F8CA40BF-557D-3E5D-B188-81C333DB4C27}</Project>
+      <Name>opencv_test_core</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_test_core_AVX.vcxproj">
+      <Project>{8FBF4367-B910-39D6-A73A-53652101BF13}</Project>
+      <Name>opencv_test_core_AVX</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_test_core_AVX2.vcxproj">
+      <Project>{FB5E48E4-4628-34B1-AB68-AB943892BA28}</Project>
+      <Name>opencv_test_core_AVX2</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_test_core_FP16.vcxproj">
+      <Project>{D943B59A-C9E1-3ADC-9F2F-1F70480F2768}</Project>
+      <Name>opencv_test_core_FP16</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_test_core_SSE4_1.vcxproj">
+      <Project>{C896E852-485D-3D0E-87D7-2BD8EF3E12F6}</Project>
+      <Name>opencv_test_core_SSE4_1</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\core\opencv_test_core_SSE4_2.vcxproj">
+      <Project>{D8EFC3CA-106A-3997-88F4-F28920D34374}</Project>
+      <Name>opencv_test_core_SSE4_2</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\dnn\opencv_test_dnn.vcxproj">
+      <Project>{DEFFB0D1-26A1-378E-BEA9-9A4B38F7167B}</Project>
+      <Name>opencv_test_dnn</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\features2d\opencv_test_features2d.vcxproj">
+      <Project>{85FDB4BB-3A63-38B9-B912-97FA0578512D}</Project>
+      <Name>opencv_test_features2d</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\flann\opencv_test_flann.vcxproj">
+      <Project>{060DC33A-FED6-3583-A4DB-803567DA2030}</Project>
+      <Name>opencv_test_flann</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\highgui\opencv_test_highgui.vcxproj">
+      <Project>{27159C00-9490-3B58-AB2E-D051826F0AD0}</Project>
+      <Name>opencv_test_highgui</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgcodecs\opencv_test_imgcodecs.vcxproj">
+      <Project>{2A82795D-0AAC-3323-A597-6B84FFE3D2BE}</Project>
+      <Name>opencv_test_imgcodecs</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgproc\opencv_test_imgproc.vcxproj">
+      <Project>{B077844A-3A41-31F0-A5A8-3ECDE81802C2}</Project>
+      <Name>opencv_test_imgproc</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\ml\opencv_test_ml.vcxproj">
+      <Project>{83E47265-4EB3-3CF2-B410-9C121CBAD519}</Project>
+      <Name>opencv_test_ml</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\objdetect\opencv_test_objdetect.vcxproj">
+      <Project>{65B83C6A-F4B6-3F5C-BCEF-53F777B04453}</Project>
+      <Name>opencv_test_objdetect</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\photo\opencv_test_photo.vcxproj">
+      <Project>{CD6797C4-C0E8-3031-A42F-A7E6FE38C7B6}</Project>
+      <Name>opencv_test_photo</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\shape\opencv_test_shape.vcxproj">
+      <Project>{A7BA7187-2197-37EE-8DCF-5ADCFB5FE604}</Project>
+      <Name>opencv_test_shape</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\stitching\opencv_test_stitching.vcxproj">
+      <Project>{7F4C3252-0A3F-3F28-9292-A22245B08421}</Project>
+      <Name>opencv_test_stitching</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\superres\opencv_test_superres.vcxproj">
+      <Project>{92198D09-4D17-36E5-BFA7-825851E2F904}</Project>
+      <Name>opencv_test_superres</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\video\opencv_test_video.vcxproj">
+      <Project>{8EFB80BC-9DCB-3815-9CD9-38936B1BCEBB}</Project>
+      <Name>opencv_test_video</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\videoio\opencv_test_videoio.vcxproj">
+      <Project>{C48519FD-787D-3A05-9A09-008CC1FC7679}</Project>
+      <Name>opencv_test_videoio</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\videostab\opencv_test_videostab.vcxproj">
+      <Project>{FD703090-1AEB-3890-83C3-F4E47877A589}</Project>
+      <Name>opencv_test_videostab</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\apps\traincascade\opencv_traincascade.vcxproj">
+      <Project>{1743775F-BF16-31BD-98DB-86DBCA27B77B}</Project>
+      <Name>opencv_traincascade</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\ts\opencv_ts.vcxproj">
+      <Project>{BEBD725B-32DB-3B98-A159-BFEE8498BA61}</Project>
+      <Name>opencv_ts</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\apps\version\opencv_version.vcxproj">
+      <Project>{53E7E608-8F87-30EF-AA40-E882B49B3238}</Project>
+      <Name>opencv_version</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\apps\version\opencv_version_win32.vcxproj">
+      <Project>{E80A454A-A8D1-3E1E-9831-E2AFB6A6F435}</Project>
+      <Name>opencv_version_win32</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\video\opencv_video.vcxproj">
+      <Project>{383AFF7D-5C7B-3F93-902D-D1F19C07C09F}</Project>
+      <Name>opencv_video</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\videoio\opencv_videoio.vcxproj">
+      <Project>{BD3B91C4-6A4C-3560-9A00-7B8CABD43B23}</Project>
+      <Name>opencv_videoio</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\videostab\opencv_videostab.vcxproj">
+      <Project>{AB44CEB2-5DCE-3E19-80D9-648F0F30F823}</Project>
+      <Name>opencv_videostab</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\apps\visualisation\opencv_visualisation.vcxproj">
+      <Project>{022B1941-0DEA-3636-8B4A-942E57DCAB9A}</Project>
+      <Name>opencv_visualisation</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\quirc\quirc.vcxproj">
+      <Project>{AD51B3CC-C9C9-3E2F-B5C3-CE96D569D8F5}</Project>
+      <Name>quirc</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\3rdparty\zlib\zlib.vcxproj">
+      <Project>{95486C53-6A6F-3AD5-9708-2B673DC754EA}</Project>
+      <Name>zlib</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B137DDF7-1CEA-36CE-8E4C-F03D7BCF36A6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\libjasper;D:\Software Download\Library\opencv_\3rdparty\libtiff;D:\Software Download\Library\opencv-3.4.4\3rdparty\libtiff;D:\Software Download\Library\opencv-3.4.4\3rdparty\libpng;D:\Software Download\Library\opencv-3.4.4\3rdparty\libwebp\src;D:\Software Download\Library\opencv_\3rdparty\libjpeg-turbo;D:\Software Download\Library\opencv-3.4.4\3rdparty\libjpeg-turbo\src;D:\Software Download\Library\opencv_\3rdparty\zlib;D:\Software Download\Library\opencv-3.4.4\3rdparty\zlib;D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv_;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\Half;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\Iex;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\IlmThread;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\Imath;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\IlmImf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Software Download\Library\opencv-3.4.4\3rdparty\libjasper;D:\Software Download\Library\opencv_\3rdparty\libtiff;D:\Software Download\Library\opencv-3.4.4\3rdparty\libtiff;D:\Software Download\Library\opencv-3.4.4\3rdparty\libpng;D:\Software Download\Library\opencv-3.4.4\3rdparty\libwebp\src;D:\Software Download\Library\opencv_\3rdparty\libjpeg-turbo;D:\Software Download\Library\opencv-3.4.4\3rdparty\libjpeg-turbo\src;D:\Software Download\Library\opencv_\3rdparty\zlib;D:\Software Download\Library\opencv-3.4.4\3rdparty\zlib;D:\Software Download\Library\opencv-3.4.4\3rdparty\Eigen;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\icv\include;D:\Software Download\Library\opencv_\3rdparty\ippicv\ippicv_win\iw\include;D:\Software Download\Library\opencv_;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\Half;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\Iex;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\IlmThread;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\Imath;D:\Software Download\Library\opencv-3.4.4\3rdparty\openexr\IlmImf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Software Download/Library/opencv-3.4.4/modules/imgcodecs/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Software Download/Library/opencv-3.4.4" "-BD:/Software Download/Library/opencv_" --check-stamp-file "D:/Software Download/Library/opencv_/modules/imgcodecs/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Software Download/Library/opencv-3.4.4/modules/imgcodecs/CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\cmake\templates\dllmain.cpp.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\vs_version.rc.in;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Software Download\Library\opencv_\modules\imgcodecs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Software Download/Library/opencv-3.4.4/modules/imgcodecs/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Software Download/Library/opencv-3.4.4" "-BD:/Software Download/Library/opencv_" --check-stamp-file "D:/Software Download/Library/opencv_/modules/imgcodecs/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Software Download/Library/opencv-3.4.4/modules/imgcodecs/CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\cmake\templates\dllmain.cpp.in;D:\Software Download\Library\opencv-3.4.4\cmake\templates\vs_version.rc.in;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\CMakeLists.txt;D:\Software Download\Library\opencv-3.4.4\modules\imgcodecs\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Software Download\Library\opencv_\modules\imgcodecs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\ZERO_CHECK.vcxproj">
+      <Project>{A68F271E-AA2B-330A-B5F5-1C0533DB9477}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgcodecs\opencv_imgcodecs.vcxproj">
+      <Project>{B419591A-8F67-3CBC-9766-B7DB8F0D7B4F}</Project>
+      <Name>opencv_imgcodecs</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgcodecs\opencv_perf_imgcodecs.vcxproj">
+      <Project>{E7309AEE-6538-39BD-A0AE-5E741D95D80E}</Project>
+      <Name>opencv_perf_imgcodecs</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Software Download\Library\opencv_\modules\imgcodecs\opencv_test_imgcodecs.vcxproj">
+      <Project>{2A82795D-0AAC-3323-A597-6B84FFE3D2BE}</Project>
+      <Name>opencv_test_imgcodecs</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

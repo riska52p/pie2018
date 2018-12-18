@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\npy_blob.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_backends.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_caffe_importer.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_darknet_importer.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_googlenet.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_halide_layers.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_ie_models.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_layers.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_main.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_misc.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_nms.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_onnx_importer.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_tf_importer.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_torch_importer.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software Download\Library\opencv_\modules\dnn\opencv_test_dnn_pch.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\npy_blob.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_common.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\test\test_precomp.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Software Download\Library\opencv-3.4.4\modules\dnn\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Include">
+      <UniqueIdentifier>{C43B2321-7BF4-33D0-9B9D-48F38698A6A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{AE371130-3FF4-31B6-AA05-365BF95FC760}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Software Download\Library\opencv_\CMakeFiles\40ffc8229f6ea69e8b723b1ca3f35354\pyopencv_generated_include.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Software Download\Library\opencv_\CMakeFiles\3c301ae4d52d6c8fc185332a5e948d19\gen_opencv_python_source.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Software Download\Library\opencv-3.4.4\modules\python\bindings\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Software Download\Library\opencv_\modules\python_bindings_generator\CMakeFiles\gen_opencv_python_source" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B3E27B8C-F0B5-30E6-8DC7-2D274DED2A30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

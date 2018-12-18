@@ -1,0 +1,21 @@
+# Target labels
+ Main
+ opencv_shape
+ AccuracyTest
+# Source files and their labels
+D:/Software Download/Library/opencv-3.4.4/modules/shape/test/test_main.cpp
+ Main
+ opencv_shape
+ AccuracyTest
+D:/Software Download/Library/opencv-3.4.4/modules/shape/test/test_shape.cpp
+ Main
+ opencv_shape
+ AccuracyTest
+D:/Software Download/Library/opencv-3.4.4/modules/shape/test/test_precomp.hpp
+ Main
+ opencv_shape
+ AccuracyTest
+D:/Software Download/Library/opencv_/modules/shape/opencv_test_shape_pch.cpp
+ Main
+ opencv_shape
+ AccuracyTest
