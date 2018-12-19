@@ -1,6 +1,0 @@
-# CMake generation dependency list for this directory.
-D:/Software Download/Library/opencv-3.4.4/modules/core/misc/java/src/java/core+Core.jcode.in
-D:/Software Download/Library/opencv-3.4.4/modules/java/common.cmake
-D:/Software Download/Library/opencv-3.4.4/modules/java/generator/CMakeLists.txt
-D:/Software Download/Library/opencv-3.4.4/modules/java/generator/android/java/org/opencv/android/OpenCVLoader.java.in
-D:/Software Download/Library/opencv-3.4.4/modules/java/generator/src/java/org/opencv/osgi/OpenCVNativeLoader.java.in
