@@ -1,7 +1,7 @@
 # Poisson Image Editing 2018
 Poisson Image Editing, ISM Final Project
 
-## Contributor
+## Contributors
 - Alex
 - Riska
 
@@ -12,3 +12,8 @@ Poisson Image Editing, ISM Final Project
 - [Code Reference 1](https://github.com/cheind/poisson-image-editing)
 - [Code Reference 2](http://www.howardzzh.com/research/poissonImageEditing/index.htm)
 - [Theory & Code Reference](http://www.ctralie.com/Teaching/PoissonImageEditing/)
+
+## Notes for OpenCV
+- Version: 3.4.4
+- lib files: opencv_world344.lib, opencv_world344d.lib
+- dll files: opencv_world344.dll, opencv_world344d.dll
