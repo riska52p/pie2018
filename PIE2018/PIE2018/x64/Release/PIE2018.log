@@ -1,19 +1,21 @@
-﻿Build started 12/19/2018 9:58:58 PM.
-     1>Project "C:\Users\user\Downloads\PIE2018\PIE2018\PIE2018.vcxproj" on node 2 (Build target(s)).
+﻿Build started 12/25/2018 9:52:25 PM.
+     1>Project "C:\Users\user\Downloads\PortableGit\pie2018\PIE2018\PIE2018\PIE2018.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I../Library/Eigen /I../Library/opencv/include /Zi /nologo /W3 /WX- /sdl /Od /Oi /GL /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"x64\Release\PIE2018.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc140.pdb" /Gd /TP /errorReport:prompt main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I../Library/Eigen /I../Library/opencv/include /Zi /nologo /W3 /WX- /sdl /Od /Oi /GL /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Release\\" /Fd"x64\Release\vc140.pdb" /Gd /TP /errorReport:prompt main.cpp
          main.cpp
+     1>main.cpp(123): warning C4244: '=': conversion from 'double' to 'uchar', possible loss of data
+     1>main.cpp(124): warning C4244: '=': conversion from 'double' to 'uchar', possible loss of data
+     1>main.cpp(125): warning C4244: '=': conversion from 'double' to 'uchar', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\user\Downloads\PIE2018\x64\Release\PIE2018.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:../Library/opencv/x64/vc14/lib opencv_world344.lib opencv_world344d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\user\Downloads\PIE2018\x64\Release\PIE2018.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\user\Downloads\PIE2018\x64\Release\PIE2018.lib" /MACHINE:X64 x64\Release\main.obj
-         x64\Release\stdafx.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\user\Downloads\PortableGit\pie2018\PIE2018\x64\Release\PIE2018.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:../Library/opencv/x64/vc14/lib opencv_world344.lib opencv_world344d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\user\Downloads\PortableGit\pie2018\PIE2018\x64\Release\PIE2018.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\user\Downloads\PortableGit\pie2018\PIE2018\x64\Release\PIE2018.lib" /MACHINE:X64 x64\Release\main.obj
          Generating code
-         1 of 29 functions ( 3.4%) were compiled, the rest were copied from previous compilation.
+         1 of 1548 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
            0 functions were new in current compilation
            0 functions had inline decision re-evaluated but remain unchanged
          Finished generating code
-         PIE2018.vcxproj -> C:\Users\user\Downloads\PIE2018\x64\Release\PIE2018.exe
-     1>Done Building Project "C:\Users\user\Downloads\PIE2018\PIE2018\PIE2018.vcxproj" (Build target(s)).
+         PIE2018.vcxproj -> C:\Users\user\Downloads\PortableGit\pie2018\PIE2018\x64\Release\PIE2018.exe
+     1>Done Building Project "C:\Users\user\Downloads\PortableGit\pie2018\PIE2018\PIE2018\PIE2018.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.06
+Time Elapsed 00:00:03.12
