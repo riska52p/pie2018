@@ -1,12 +1,7 @@
-// PIE2018.cpp : Defines the entry point for the console application.
-//
-
-//#include "stdafx.h"
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include <iostream>
-#include <string>
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 
@@ -14,118 +9,239 @@ using namespace cv;
 using namespace std;
 using namespace Eigen;
 
-Rect rect, rec1, roi1;
-Mat image, src, target, mask, roi;
-bool mousedown;
-vector<vector<Point> > contours;
+bool mousedown, ismix = false;
+Mat mask, target, roi, src;
+vector<vector<Point>> contours;
 vector<Point> pts;
-Point minp(1000, 1000);
+Point minp, maxp;
 
-Mat poi(Mat s, Mat t, Mat ma)
+enum state {SEAMLESS_CLONING, MIXED_CLONING, TEXTURE_FLATTENING, ILLUMINATION, COLOR, SEAMLESS_TILING} e_state;
+
+static Mat EdgeDetector(int, void*)
 {
-	Mat tmp(s.size(), CV_8UC3);
+	int lowThreshold = 40; //make it can be changed if have time
+	//const int max_lowThreshold = 100;
+	const int ratio = 3;
+	const int kernel_size = 3;
+	Mat srcGray, edgeMask, dst;
+	dst.create(src.size(), src.type());
+	cvtColor(src, srcGray, COLOR_BGR2GRAY);
+	blur(srcGray, edgeMask, Size(3, 3));
+	Canny(edgeMask, edgeMask, lowThreshold, lowThreshold * ratio, kernel_size);
+	
+	dst = Scalar::all(0);
+	src.copyTo(dst, edgeMask);
+	imshow("Edge Mask", edgeMask);
+	return edgeMask;
+}
 
-	SparseMatrix<double, RowMajor> A(tmp.cols * tmp.rows, tmp.cols * tmp.rows);
+Mat poisson(Mat s, Mat t, Mat ma)
+{
+	Mat out(s.size(), CV_8UC3);
+	// Sparse matrix
+	SparseMatrix<double, RowMajor> A(out.cols * out.rows, out.cols * out.rows);
 	SimplicialCholesky<SparseMatrix<double>> solver;
-	MatrixXd b = MatrixXd::Zero(tmp.cols * tmp.rows, 3);
-	MatrixXd x(tmp.cols * tmp.rows, 3);
+	MatrixXd b = MatrixXd::Zero(out.cols * out.rows, 3);
+	MatrixXd x(out.cols * out.rows, 3);
 
-	for (int i = 0; i < tmp.rows; i++)
+	for (int i = 0; i < out.rows; i++)
 	{
-		for (int j = 0; j < tmp.cols; j++)
+		for (int j = 0; j < out.cols; j++)
 		{
 			Vector3d p;
-			//unknown
+			// Unknown pixels
 			if (ma.at<uchar>(i, j) == 255)
 			{
 				p << t.at<Vec3b>(i, j)[0], t.at<Vec3b>(i, j)[1], t.at<Vec3b>(i, j)[2];
 				int n = 4;
-				//up
+				// Up
 				if (i == 0)
 					n--;
 				else
 				{
-					A.coeffRef(i*tmp.cols + j, (i - 1)*tmp.cols + j) = -1;
-					Vector3d q;
-					/*if (ma.at<uchar>(i - 1, j) == 0)
+					A.coeffRef(i*out.cols + j, (i - 1)*out.cols + j) = -1;
+					Vector3d q(t.at<Vec3b>(i - 1, j)[0], t.at<Vec3b>(i - 1, j)[1], t.at<Vec3b>(i - 1, j)[2]);
+					Vector3d p1, q1;
+					double f, f1;
+					switch (e_state)
 					{
-						q << s.at<Vec3b>(i - 1, j)[0], s.at<Vec3b>(i - 1, j)[1], s.at<Vec3b>(i - 1, j)[2];
-						b.row(i*tmp.cols + j) += q;
-					}*/
-					q << t.at<Vec3b>(i - 1, j)[0], t.at<Vec3b>(i - 1, j)[1], t.at<Vec3b>(i - 1, j)[2];
-					b.row(i*tmp.cols + j) += p - q;
+						case SEAMLESS_CLONING:
+							b.row(i*out.cols + j) += p - q;
+						break;
+						case MIXED_CLONING:
+							p1 = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
+							q1 = Vector3d(s.at<Vec3b>(i - 1, j)[0], s.at<Vec3b>(i - 1, j)[1], s.at<Vec3b>(i - 1, j)[2]);
+							f = (p - q).dot(p - q);
+							f1 = (p1 - q1).dot(p1 - q1);
+							if (f < f1)
+								b.row(i*out.cols + j) += p1 - q1;
+							else b.row(i*out.cols + j) += p - q;
+							break;
+						case TEXTURE_FLATTENING:
+							p1 = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
+							q1 = Vector3d(s.at<Vec3b>(i - 1, j)[0], s.at<Vec3b>(i - 1, j)[1], s.at<Vec3b>(i - 1, j)[2]);
+							b.row(i*out.cols + j) += (p1 - q1);
+							break;
+					}
 				}
-				//down
-				if (i == tmp.rows-1)
+				// Down
+				if (i == out.rows - 1)
 					n--;
 				else
 				{
-					A.coeffRef(i*tmp.cols + j, (i + 1)*tmp.cols + j) = -1;
-					Vector3d q;
-					/*if (ma.at<uchar>(i + 1, j) == 0)
+					A.coeffRef(i*out.cols + j, (i + 1)*out.cols + j) = -1;
+					Vector3d q(t.at<Vec3b>(i + 1, j)[0], t.at<Vec3b>(i + 1, j)[1], t.at<Vec3b>(i + 1, j)[2]);
+					Vector3d p1, q1;
+					double f, f1;
+					switch(e_state)
 					{
-						q << s.at<Vec3b>(i + 1, j)[0], s.at<Vec3b>(i + 1, j)[1], s.at<Vec3b>(i + 1, j)[2];
-						b.row(i*tmp.cols + j) += q;
-					}*/
-					q << t.at<Vec3b>(i + 1, j)[0], t.at<Vec3b>(i + 1, j)[1], t.at<Vec3b>(i + 1, j)[2];
-					b.row(i*tmp.cols + j) += p - q;
+					case SEAMLESS_CLONING:
+						b.row(i*out.cols + j) += p - q;
+						break;
+					case MIXED_CLONING:
+						p1 = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
+						q1 = Vector3d(s.at<Vec3b>(i + 1, j)[0], s.at<Vec3b>(i + 1, j)[1], s.at<Vec3b>(i + 1, j)[2]);
+						f = (p - q).dot(p - q);
+						f1 = (p1 - q1).dot(p1 - q1);
+						if (f < f1)
+							b.row(i*out.cols + j) += p1 - q1;
+						else b.row(i*out.cols + j) += p - q;
+						break;
+					case TEXTURE_FLATTENING:
+						p1 = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
+						q1 = Vector3d(s.at<Vec3b>(i + 1, j)[0], s.at<Vec3b>(i + 1, j)[1], s.at<Vec3b>(i + 1, j)[2]);
+						b.row(i*out.cols + j) += (p1 - q1);
+						break;
+					}
 				}
-				//left
+				// Left
 				if (j == 0)
 					n--;
 				else
 				{
-					A.coeffRef(i*tmp.cols + j, i*tmp.cols + j - 1) = -1;
-					Vector3d q;
-					/*if (ma.at<uchar>(i, j - 1) == 0)
+					A.coeffRef(i*out.cols + j, i*out.cols + j - 1) = -1;
+					Vector3d q(t.at<Vec3b>(i, j - 1)[0], t.at<Vec3b>(i, j - 1)[1], t.at<Vec3b>(i, j - 1)[2]);
+					Vector3d p1, q1;
+					double f, f1;
+					switch (e_state)
 					{
-						q << s.at<Vec3b>(i, j - 1)[0], s.at<Vec3b>(i, j - 1)[1], s.at<Vec3b>(i, j - 1)[2];
-						b.row(i*tmp.cols + j) += q;
-					}*/
-					q << t.at<Vec3b>(i, j - 1)[0], t.at<Vec3b>(i, j - 1)[1], t.at<Vec3b>(i, j - 1)[2];
-					b.row(i*tmp.cols + j) += p - q;
+					case SEAMLESS_CLONING:
+						b.row(i*out.cols + j) += p - q;
+						break;
+					case MIXED_CLONING:
+						p1 = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
+						q1 = Vector3d(s.at<Vec3b>(i, j - 1)[0], s.at<Vec3b>(i, j - 1)[1], s.at<Vec3b>(i, j - 1)[2]);
+						f = (p - q).dot(p - q);
+						f1 = (p1 - q1).dot(p1 - q1);
+						if (f < f1)
+							b.row(i*out.cols + j) += p1 - q1;
+						else b.row(i*out.cols + j) += p - q;
+						break;
+					case TEXTURE_FLATTENING:
+						p1 = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
+						q1 = Vector3d(s.at<Vec3b>(i, j - 1)[0], s.at<Vec3b>(i, j - 1)[1], s.at<Vec3b>(i, j - 1)[2]);
+						b.row(i*out.cols + j) += (p1 - q1);
+						break;
+					}
 				}
-				//right
-				if (j == tmp.cols - 1)
+				// Right
+				if (j == out.cols - 1)
 					n--;
 				else
 				{
-					A.coeffRef(i*tmp.cols + j, i*tmp.cols + j + 1) = -1;
-					Vector3d q;
-					/*if (ma.at<uchar>(i, j + 1) == 0)
+					A.coeffRef(i*out.cols + j, i*out.cols + j + 1) = -1;
+					Vector3d q(t.at<Vec3b>(i, j + 1)[0], t.at<Vec3b>(i, j + 1)[1], t.at<Vec3b>(i, j + 1)[2]);
+					Vector3d p1, q1;
+					double f, f1;
+					switch (e_state)
 					{
-						q << s.at<Vec3b>(i, j + 1)[0], s.at<Vec3b>(i, j + 1)[1], s.at<Vec3b>(i, j + 1)[2];
-						b.row(i*tmp.cols + j) += q;
-					}*/
-					q << t.at<Vec3b>(i, j + 1)[0], t.at<Vec3b>(i, j + 1)[1], t.at<Vec3b>(i, j + 1)[2];
-					b.row(i*tmp.cols + j) += p - q;
+					case SEAMLESS_CLONING:
+						b.row(i*out.cols + j) += p - q;
+						break;
+					case MIXED_CLONING:
+						p1 = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
+						q1 = Vector3d(s.at<Vec3b>(i, j + 1)[0], s.at<Vec3b>(i, j + 1)[1], s.at<Vec3b>(i, j + 1)[2]);
+						f = (p - q).dot(p - q);
+						f1 = (p1 - q1).dot(p1 - q1);
+						if (f < f1)
+							b.row(i*out.cols + j) += p1 - q1;
+						else b.row(i*out.cols + j) += p - q;
+						break;
+					case TEXTURE_FLATTENING:
+						p1 = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
+						q1 = Vector3d(s.at<Vec3b>(i, j + 1)[0], s.at<Vec3b>(i, j + 1)[1], s.at<Vec3b>(i, j + 1)[2]);
+						b.row(i*out.cols + j) += (p1 - q1);
+						break;
+					}
 				}
-				//center
-				A.coeffRef(i*tmp.cols + j, i*tmp.cols + j) = n;
+				// Center
+				A.coeffRef(i*out.cols + j, i*out.cols + j) = n;
 			}
+			// Known pixels
 			else
 			{
-				A.coeffRef(i*tmp.cols + j, i*tmp.cols + j) = 1;
+				A.coeffRef(i*out.cols + j, i*out.cols + j) = 1;
 				p << s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2];
-				b.row(i*tmp.cols + j) = p;
+				switch (e_state)
+				{
+				case SEAMLESS_CLONING:
+					b.row(i*out.cols + j) = p;
+					break;
+				case MIXED_CLONING:
+					b.row(i*out.cols + j) = p;
+					break;
+				case TEXTURE_FLATTENING:
+					int n = 4;
+					//up
+					if (i == 0)
+						n--;
+					else
+					{
+						Vector3d q(t.at<Vec3b>(i - 1, j)[0], t.at<Vec3b>(i - 1, j)[1], t.at<Vec3b>(i - 1, j)[2]);
+						b.row(i*out.cols + j) += q;
+					}
+					//down
+					if (i == out.rows - 1)
+						n--;
+					else
+					{
+						Vector3d q(t.at<Vec3b>(i + 1, j)[0], t.at<Vec3b>(i + 1, j)[1], t.at<Vec3b>(i + 1, j)[2]);
+						b.row(i*out.cols + j) += q;
+					}
+					//left
+					if (j == 0)
+						n--;
+					else
+					{
+						Vector3d q(t.at<Vec3b>(i, j - 1)[0], t.at<Vec3b>(i, j - 1)[1], t.at<Vec3b>(i, j - 1)[2]);
+						b.row(i*out.cols + j) += q;
+					}
+					//right
+					if (j == out.cols - 1)
+						n--;
+					else
+					{
+						Vector3d q(t.at<Vec3b>(i, j + 1)[0], t.at<Vec3b>(i, j + 1)[1], t.at<Vec3b>(i, j + 1)[2]);
+						b.row(i*out.cols + j) += q;
+					}
+					b.row(i*out.cols + j) /= 4;
+					//b.row(i*out.cols + j) -= p;
+					break;
+				}
 			}
-
 		}
 	}
-
+	// Solve poisson equation
 	solver.compute(A.transpose() * A);
 	x = solver.solve(A.transpose() * b);
+	// Result
+	for (int i = 0; i < out.rows; i++)
+		for (int j = 0; j < out.cols; j++)
+			for (int k = 0; k < 3; k++)
+				// Deal with overflow
+				out.at<Vec3b>(i, j)[k] = MAX(MIN(x(i * out.cols + j, k), 255), 0);
 
-	for (int i = 0; i < tmp.rows; i++)
-	{
-		for (int j = 0; j < tmp.cols; j++)
-		{
-			tmp.at<Vec3b>(i, j)[0] = x(i * tmp.cols + j, 0);
-			tmp.at<Vec3b>(i, j)[1] = x(i * tmp.cols + j, 1);
-			tmp.at<Vec3b>(i, j)[2] = x(i * tmp.cols + j, 2);
-		}
-	}
-	return tmp;
+	return out;
 }
 
 void onMouse(int event, int x, int y, int flags, void* userdata)
@@ -134,8 +250,32 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 
 	if (event == EVENT_LBUTTONDOWN)
 	{
+		//reset
 		mousedown = true;
+		contours.clear();
 		pts.clear();
+		minp = Point(1000, 1000);
+		maxp = Point(0, 0);
+		roi = target.clone();
+	}
+
+	if (event == EVENT_RBUTTONDOWN)
+	{
+		if(e_state == SEAMLESS_CLONING || e_state == MIXED_CLONING)
+		{
+			// Seamless cloning
+			Mat image = img.clone();
+			Mat tar = target.clone();
+			// Crop images
+			Mat crops = image(Rect(x, y, MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
+			tar = tar(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
+			Mat cropm = mask(Rect(0, 0, MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
+			// Solve poisson equation
+			Mat result = poisson(crops, tar, cropm);
+			result.copyTo(crops);
+			imshow("final", image);
+		}
+		
 	}
 
 	if (event == EVENT_LBUTTONUP)
@@ -143,30 +283,28 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 		mousedown = false;
 		if (pts.size() > 2)
 		{
-			mask = Mat::zeros(target.size(), CV_8UC1);
+			// Create mask
+			mask = Mat::zeros(img.size(), CV_8UC1);
 			contours.push_back(pts);
-			drawContours(mask, contours, 0, Scalar(255), -1);
-		}
-		else
-		{
-			Mat mask2 = src.clone();
-			Mat tar = target.clone();
-			Mat mas = mask2(Rect(x-minp.x, y-minp.y, target.cols, target.rows));
-			Mat re = poi(mas, tar, mask);
-			re.copyTo(mas);
-			imshow("final", mask2);
+			drawContours(mask, contours, 0, 255, -1);
+			// Pad bounding box by 5 pixels 
+			mask = mask(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), MIN(maxp.x - minp.x + 10, mask.cols - minp.x), MIN(maxp.y - minp.y + 10, mask.rows - minp.y)));
 		}
 	}
 
 	if (mousedown)
 	{
+		// Draw contour
 		if (pts.size() > 2)
 		{
-			line(img, Point(x, y), pts[pts.size() - 1], Scalar(0));
-			//offset
-			minp.x = MIN(minp.x, x);
-			minp.y = MIN(minp.y, y);
-			imshow("Mask", img);
+			// Show contour
+			line(img, Point(x, y), pts[pts.size() - 1], 0);
+			// Bounding box
+			minp.x = MAX(MIN(minp.x, x), 0);
+			minp.y = MAX(MIN(minp.y, y), 0);
+			maxp.x = MIN(MAX(maxp.x, x), img.cols);
+			maxp.y = MIN(MAX(maxp.y, y), img.rows);
+			imshow("roi", img);
 		}
 			
 		pts.push_back(Point(x, y));
@@ -175,28 +313,57 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 
 int main(int argc, char** argv)
 {
-	String imageName("../Image/bg.jpg"); // by default
-	String image1Name("../Image/bird.jpg"); // by default
-
-	src = imread(imageName); // Read the file
-	target = imread(image1Name); // Read the file
-	roi = target.clone();
-	Mat a = src.clone();
-	//roi1 = Rect(0, 0, target.cols, target.rows);
-	//image = imread(imageName, IMREAD_COLOR); // Read the file
-	if (src.empty() || target.empty())		 // Check for invalid input
+	// Read the src file
+	src = imread("../Image/pe_face1.png");
+	// Read the target file
+	target = imread("../Image/bird.jpg");
+	// Check for invalid input
+	if (src.empty() || target.empty())
 	{
 		cout << "Could not open or find the image" << endl;
 		return -1;
 	}
-	namedWindow("Mask");		  // Create a window for display.
-	imshow("Mask", roi);		  // Show our image inside it.
-	setMouseCallback("Mask", onMouse, &roi);
-
-	namedWindow("src");		  // Create a window for display.
-	imshow("src", src);		  // Show our image inside it.
-	setMouseCallback("src", onMouse, &a);
-	
-	waitKey(0);				// Wait for a keystroke in the window
+	roi = target.clone();
+	// Show target to select roi
+	imshow("roi", roi);
+	//setMouseCallback("roi", onMouse, &roi);
+	// Show background
+	imshow("src", src);
+	//setMouseCallback("src", onMouse, &src);
+	while (1)
+	{
+		switch (waitKey(0))
+		{
+			// Press 'ESC' to end the program
+			case 27:
+				exit(0);
+				break;
+			// Mixed gradient
+			case 'm':
+				e_state = MIXED_CLONING;
+				cout << e_state << endl;
+				setMouseCallback("roi", onMouse, &roi);
+				setMouseCallback("src", onMouse, &src);
+				break;
+			// No mixed gradient
+			case 'n':
+				e_state = SEAMLESS_CLONING;
+				cout << e_state << endl;
+				setMouseCallback("roi", onMouse, &roi);
+				setMouseCallback("src", onMouse, &src);
+				break;
+			// Edge Detector
+			case 'e':
+				e_state = TEXTURE_FLATTENING;
+				cout << e_state << endl;
+				Mat dest = src.clone();
+				Mat mask1 = EdgeDetector(0, 0);
+				//imshow("Test", mask);
+				Mat result = poisson(src, dest, mask1);
+				//result.copyTo(mask);
+				imshow("Texture Flatten", result);
+				break;
+		}
+	}
 	return 0;
 }
