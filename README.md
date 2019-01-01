@@ -1,5 +1,5 @@
 # Poisson Image Editing 2018
-Poisson Image Editing, ISM Final Project
+ISM Final Project
 
 ## Contributors
 - Alex
@@ -13,7 +13,15 @@ Poisson Image Editing, ISM Final Project
 - [Code Reference 2](http://www.howardzzh.com/research/poissonImageEditing/index.htm)
 - [Theory & Code Reference](http://www.ctralie.com/Teaching/PoissonImageEditing/)
 
-## Notes for OpenCV
-- Version: 3.4.4
-- lib files: opencv_world344.lib, opencv_world344d.lib
-- dll files: opencv_world344.dll, opencv_world344d.dll
+## Environment
+- Visual Studio 2015 x64 Release
+- OpenCV 3.4.4
+- Eigen
+
+## Instructions
+- Press 'm' to do mixed gradient cloning
+- Press 'n' to do seamless cloning
+- Circle on the 'roi' image for the region you want to clone to the source image
+- Right click on the 'src' image to choose the location you want to clone to
+- Press 'e' to do texture flattening
+- Press 'ESC' to end the program
