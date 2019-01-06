@@ -24,4 +24,11 @@ ISM Final Project
 - Circle on the 'roi' image for the region you want to clone to the source image
 - Right click on the 'src' image to choose the location you want to clone to
 - Press 'e' to do texture flattening
+- Press 'i' to do local illumination change
+-- Circle on the 'roi' image for the region you want to change
+-- Right click on the 'roi' image
+- Press 'c' to do local color change
+-- Circle on the 'roi' image for the region you want to change
+-- Right click on the 'roi' image
+- Press 't' to do seamless tiling
 - Press 'ESC' to end the program
