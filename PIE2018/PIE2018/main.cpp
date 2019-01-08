@@ -1,6 +1,7 @@
 ﻿#include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
+#include <opencv2/photo.hpp>
 #include <iostream>
 #include <cstdlib>
 #include <Eigen/Dense>
@@ -49,9 +50,6 @@ Mat GradientNorm(Mat img)
 	Sobel(imgGray, gradY, CV_16S, 0, 1, 3, 1, 0, BORDER_DEFAULT);
 	gradNorm = abs(gradX) + abs(gradY);
 
-	//imshow("GradX", gradX);
-	//imshow("GradY", gradY);
-	//imshow("GradNorm", gradNorm);
 	return gradNorm;
 }
 
@@ -63,23 +61,30 @@ Mat poisson(Mat s, Mat t, Mat ma)
 	SimplicialCholesky<SparseMatrix<double>> solver;
 	MatrixXd b = MatrixXd::Zero(out.cols * out.rows, 3);
 	MatrixXd x(out.cols * out.rows, 3);
-	Mat gradNorm = GradientNorm(t);
+	/*Mat grad;
+	Laplacian(src, grad, CV_16S, 3);
+	imshow("Laplacian", grad);*/
 
 	for (int i = 0; i < out.rows; i++)
 	{
 		for (int j = 0; j < out.cols; j++)
 		{
-			Vector3d p;
+			Vector3d p, gn, alpha, ab;
+			double beta;
+			Mat gradNorm;
 			// Unknown pixels
 			if (ma.at<uchar>(i, j) == 255)
 			{
 				p << t.at<Vec3b>(i, j)[0], t.at<Vec3b>(i, j)[1], t.at<Vec3b>(i, j)[2];
 				int n = 4;
-				//double alpha, beta, ab;
-				Vector3d gn(gradNorm.at<Vec3b>(i, j)[0], gradNorm.at<Vec3b>(i, j)[1], gradNorm.at<Vec3b>(i, j)[2]);
-				Vector3d alpha = 0.2 * gn;
-				double beta = 0.2;
-				Vector3d ab(pow(alpha[0], beta), pow(alpha[1], beta), pow(alpha[2], beta));
+				if(e_state == ILLUMINATION)
+				{
+					gradNorm = GradientNorm(t);
+					gn = Vector3d(gradNorm.at<Vec3b>(i, j)[0], gradNorm.at<Vec3b>(i, j)[1], gradNorm.at<Vec3b>(i, j)[2]);
+					alpha = 0.2 * gn;
+					beta = 0.2;
+					ab = Vector3d(pow(alpha[0], beta), pow(alpha[1], beta), pow(alpha[2], beta));
+				}
 				// Up
 				if (i == 0)
 					n--;
@@ -112,6 +117,18 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						pq = Vector3d(pow(pq[0] + 0.0001, -beta), pow(pq[1] + 0.0001, -beta), pow(pq[2] + 0.0001, -beta));
 						g = Vector3d(ab[0] * pq[0] * p1q1[0], ab[1] * pq[1] * p1q1[1], ab[2] * pq[2] * p1q1[2]);
 						b.row(i*out.cols + j) += g;
+						break;
+					case COLOR:
+						p = Vector3d(t.at<Vec3b>(i, j)[0] * 0.5, t.at<Vec3b>(i, j)[1] * 0.5, t.at<Vec3b>(i, j)[2] * 2.5);
+						q = Vector3d(t.at<Vec3b>(i - 1, j)[0] * 0.5, t.at<Vec3b>(i - 1, j)[1] * 0.5, t.at<Vec3b>(i - 1, j)[2] * 2.5);
+						f = (p - q).dot(p - q);
+						f1 = (p1 - q1).dot(p1 - q1);
+						if (f < f1)
+							pq = p1 - q1;
+						else pq = (p - q);
+						b.row(i*out.cols + j) += pq;
+						break;
+					case SEAMLESS_TILING:
 						break;
 					}
 				}
@@ -148,6 +165,18 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						g = Vector3d(ab[0] * pq[0] * p1q1[0], ab[1] * pq[1] * p1q1[1], ab[2] * pq[2] * p1q1[2]);
 						b.row(i*out.cols + j) += g;
 						break;
+					case COLOR:
+						p = Vector3d(t.at<Vec3b>(i, j)[0] * 0.5, t.at<Vec3b>(i, j)[1] * 0.5, t.at<Vec3b>(i, j)[2] * 2.5);
+						q = Vector3d(t.at<Vec3b>(i + 1, j)[0] * 0.5, t.at<Vec3b>(i + 1, j)[1] * 0.5, t.at<Vec3b>(i + 1, j)[2] * 2.5);
+						f = (p - q).dot(p - q);
+						f1 = (p1 - q1).dot(p1 - q1);
+						if (f < f1)
+							pq = p1 - q1;
+						else pq = p - q;
+						b.row(i*out.cols + j) += pq;
+						break;
+					case SEAMLESS_TILING:
+						break;
 					}
 				}
 				// Left
@@ -182,6 +211,18 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						pq = Vector3d(pow(pq[0] + 0.0001, -beta), pow(pq[1] + 0.0001, -beta), pow(pq[2] + 0.0001, -beta));
 						g = Vector3d(ab[0] * pq[0] * p1q1[0], ab[1] * pq[1] * p1q1[1], ab[2] * pq[2] * p1q1[2]);
 						b.row(i*out.cols + j) += g;
+						break;
+					case COLOR:
+						p = Vector3d(t.at<Vec3b>(i, j)[0] * 0.5, t.at<Vec3b>(i, j)[1] * 0.5, t.at<Vec3b>(i, j)[2] * 2.5);
+						q = Vector3d(t.at<Vec3b>(i, j - 1)[0] * 0.5, t.at<Vec3b>(i, j - 1)[1] * 0.5, t.at<Vec3b>(i, j - 1)[2] * 2.5);
+						f = (p - q).dot(p - q);
+						f1 = (p1 - q1).dot(p1 - q1);
+						if (f < f1)
+							pq = p1 - q1;
+						else pq = p - q;
+						b.row(i*out.cols + j) += pq;
+						break;
+					case SEAMLESS_TILING:
 						break;
 					}
 				}
@@ -218,6 +259,18 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						g = Vector3d(ab[0] * pq[0] * p1q1[0], ab[1] * pq[1] * p1q1[1], ab[2] * pq[2] * p1q1[2]);
 						b.row(i*out.cols + j) += g;
 						break;
+					case COLOR:
+						p = Vector3d(t.at<Vec3b>(i, j)[0] * 0.5, t.at<Vec3b>(i, j)[1] * 0.5, t.at<Vec3b>(i, j)[2] * 2.5);
+						q = Vector3d(t.at<Vec3b>(i, j + 1)[0] * 0.5, t.at<Vec3b>(i, j + 1)[1] * 0.5, t.at<Vec3b>(i, j + 1)[2] * 2.5);
+						f = (p - q).dot(p - q);
+						f1 = (p1 - q1).dot(p1 - q1);
+						if (f < f1)
+							pq = p1 - q1;
+						else pq = p - q;
+						b.row(i*out.cols + j) += pq;
+						break;
+					case SEAMLESS_TILING:
+						break;
 					}
 				}
 				// Center
@@ -231,15 +284,8 @@ Mat poisson(Mat s, Mat t, Mat ma)
 				int n;
 				A.coeffRef(i*out.cols + j, i*out.cols + j) = 1;
 				p << s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2];
-				switch (e_state)
+				if(e_state == TEXTURE_FLATTENING)
 				{
-				case SEAMLESS_CLONING:
-					b.row(i*out.cols + j) = p;
-					break;
-				case MIXED_CLONING:
-					b.row(i*out.cols + j) = p;
-					break;
-				case TEXTURE_FLATTENING:
 					n = 4;
 					//up
 					if (i == 0)
@@ -247,7 +293,8 @@ Mat poisson(Mat s, Mat t, Mat ma)
 					else
 					{
 						Vector3d q(t.at<Vec3b>(i - 1, j)[0], t.at<Vec3b>(i - 1, j)[1], t.at<Vec3b>(i - 1, j)[2]);
-						b.row(i*out.cols + j) += q+ p-q;
+						
+						b.row(i*out.cols + j) += q + p - q;
 					}
 					//down
 					if (i == out.rows - 1)
@@ -255,7 +302,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 					else
 					{
 						Vector3d q(t.at<Vec3b>(i + 1, j)[0], t.at<Vec3b>(i + 1, j)[1], t.at<Vec3b>(i + 1, j)[2]);
-						b.row(i*out.cols + j) += q + p-q;
+						b.row(i*out.cols + j) += q + p - q;
 					}
 					//left
 					if (j == 0)
@@ -263,7 +310,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 					else
 					{
 						Vector3d q(t.at<Vec3b>(i, j - 1)[0], t.at<Vec3b>(i, j - 1)[1], t.at<Vec3b>(i, j - 1)[2]);
-						b.row(i*out.cols + j) += q + p-q;
+						b.row(i*out.cols + j) += q + p - q;
 					}
 					//right
 					if (j == out.cols - 1)
@@ -271,14 +318,12 @@ Mat poisson(Mat s, Mat t, Mat ma)
 					else
 					{
 						Vector3d q(t.at<Vec3b>(i, j + 1)[0], t.at<Vec3b>(i, j + 1)[1], t.at<Vec3b>(i, j + 1)[2]);
-						b.row(i*out.cols + j) += q + p-q;
+						b.row(i*out.cols + j) += q + p - q;
 					}
 					b.row(i*out.cols + j) /= 4;
-					break;
-				case ILLUMINATION:
-					b.row(i*out.cols + j) = p;
-					break;
 				}
+				else
+					b.row(i*out.cols + j) = p;
 			}
 		}
 	}
@@ -341,7 +386,7 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 			// Solve poisson equation
 			Mat result = poisson(crops, tar, cropm);
 			result.copyTo(crops);
-			imshow("final", image);
+			imshow("Cloning", image);
 		}
 		if(e_state == ILLUMINATION)
 		{
@@ -351,12 +396,23 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 			//change crops so that it is in the same place as the selected region (ohm) - done
 			Mat crops = image(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
 			Mat cropm = mask(Rect(0, 0, MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
-			//imshow("test", crops);
-			//Mat gradNorm = GradientNorm(image);
 			// Solve poisson equation
 			Mat result = poisson(crops, tar, cropm);
 			result.copyTo(crops);
-			imshow("Illumination", image);
+			imshow("Illumination Change", image);
+		}
+		if(e_state == COLOR)
+		{
+			Mat image = target.clone();
+			Mat tar = target.clone();
+			// Crop images
+			Mat crops = image(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
+			tar = tar(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
+			Mat cropm = mask(Rect(0, 0, MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
+			// Solve poisson equation
+			Mat result = poisson(crops, tar, cropm);
+			result.copyTo(crops);
+			imshow("Color Change", image);
 		}
 	}
 
@@ -397,7 +453,7 @@ int main(int argc, char** argv)
 	// Read the src file
 	src = imread("../Image/beach.jpg");
 	// Read the target file
-	target = imread("../Image/orange.jpg");
+	target = imread("../Image/bird.jpg");
 	// Check for invalid input
 	if (src.empty() || target.empty())
 	{
@@ -437,6 +493,13 @@ int main(int argc, char** argv)
 		case 'i':
 			e_state = ILLUMINATION;
 			setMouseCallback("roi", onMouse, &roi);
+			break;
+		case 'c':
+			e_state = COLOR;
+			setMouseCallback("roi", onMouse, &roi);
+			break;
+		case 't':
+			e_state = SEAMLESS_TILING;
 			break;
 		}
 	}
