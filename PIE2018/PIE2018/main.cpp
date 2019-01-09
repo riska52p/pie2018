@@ -129,6 +129,16 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						b.row(i*out.cols + j) += pq;
 						break;
 					case SEAMLESS_TILING:
+						if (i != out.rows - 1)
+						{
+							q = Vector3d(t.at<Vec3b>(i - 1, j)[0], t.at<Vec3b>(i - 1, j)[1], t.at<Vec3b>(i - 1, j)[2]);
+							q1 = Vector3d(t.at<Vec3b>(i + 1, j)[0], t.at<Vec3b>(i + 1, j)[1], t.at<Vec3b>(i + 1, j)[2]);
+							b.row(i*out.cols + j) += 0.5*((p - q) + (p - q1));
+							//b.row(i*out.cols + j) += Vector3d(0, 0, 0);
+							//cout << "q: " << q << "q1: " << q1 << endl;
+						}
+						else
+							b.row(i*out.cols + j) += p-q;
 						break;
 					}
 				}
@@ -176,6 +186,16 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						b.row(i*out.cols + j) += pq;
 						break;
 					case SEAMLESS_TILING:
+						if (i != 0)
+						{
+							q = Vector3d(t.at<Vec3b>(i + 1, j)[0], t.at<Vec3b>(i + 1, j)[1], t.at<Vec3b>(i + 1, j)[2]);
+							q1 = Vector3d(t.at<Vec3b>(i - 1, j)[0], t.at<Vec3b>(i - 1, j)[1], t.at<Vec3b>(i - 1, j)[2]);
+							b.row(i*out.cols + j) += 0.5*((p - q) + (p - q1));
+							//b.row(i*out.cols + j) += Vector3d(0, 0, 0);
+							//cout << "q: " << q << "q1: " << q1 << endl;
+						}
+						else
+							b.row(i*out.cols + j) += p-q;
 						break;
 					}
 				}
@@ -223,6 +243,16 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						b.row(i*out.cols + j) += pq;
 						break;
 					case SEAMLESS_TILING:
+						if (j != out.cols - 1)
+						{
+							q = Vector3d(t.at<Vec3b>(i, j - 1)[0], t.at<Vec3b>(i, j - 1)[1], t.at<Vec3b>(i, j - 1)[2]);
+							q1 = Vector3d(t.at<Vec3b>(i, j + 1)[0], t.at<Vec3b>(i, j + 1)[1], t.at<Vec3b>(i, j + 1)[2]);
+							b.row(i*out.cols + j) += 0.5*((p - q) + (p - q1));
+							//b.row(i*out.cols + j) += Vector3d(0, 0, 0);
+							//cout << "q: " << q << "q1: " << q1 << endl;
+						}
+						else
+							b.row(i*out.cols + j) += p - q;
 						break;
 					}
 				}
@@ -270,6 +300,16 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						b.row(i*out.cols + j) += pq;
 						break;
 					case SEAMLESS_TILING:
+						if (j != 0)
+						{
+							q = Vector3d(t.at<Vec3b>(i, j + 1)[0], t.at<Vec3b>(i, j + 1)[1], t.at<Vec3b>(i, j + 1)[2]);
+							q1 = Vector3d(t.at<Vec3b>(i, j - 1)[0], t.at<Vec3b>(i, j - 1)[1], t.at<Vec3b>(i, j - 1)[2]);
+							b.row(i*out.cols + j) += 0.5*((p - q) + (p - q1)); //try +- 1
+							//b.row(i*out.cols + j) += Vector3d(0, 0, 0);
+							//cout << "q: " << q << "q1: " << q1 << endl;
+						}
+						else
+							b.row(i*out.cols + j) += p-q;
 						break;
 					}
 				}
@@ -357,6 +397,36 @@ void TextureFlattening()
 	imshow("Texture Flatten", result);
 }
 
+void SeamlessTiling()
+{
+	Mat dest = src.clone();
+	int width = src.cols;
+	int height = src.rows;
+	int tileSize = 200;
+	Mat mask2(height, width, CV_8UC3, Scalar(0, 0, 0));
+
+	for(int i = tileSize; i <= height - tileSize; i+= tileSize)
+	{
+		for(int j = tileSize; j <= width - tileSize; j += tileSize)
+		{
+			int k = j*i + j;
+			line(mask2, Point(j, 0), Point(j, height), Scalar(255, 255, 255), 5);
+			line(mask2, Point(0, i), Point(width, i), Scalar(255, 255, 255), 5);
+			//Rect grid_rect(j, i, tileSize, tileSize);
+			//cout << grid_rect << endl;
+		
+			//rectangle(mask2, grid_rect, Scalar(255, 255, 255), 10);
+			//imshow(format("grid%d", k), mask2(grid_rect));
+		}
+	}
+	imshow("mask2", mask2);
+	//mask2 have no value
+
+	Mat result = poisson(src, dest, mask2);
+	result.copyTo(dest);
+	imshow("Seamless Tiling", dest);
+}
+
 void onMouse(int event, int x, int y, int flags, void* userdata)
 {
 	Mat img = *((Mat *)userdata);
@@ -393,11 +463,12 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 			Mat image = target.clone();
 			Mat tar = target.clone();
 			tar = tar(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
-			//change crops so that it is in the same place as the selected region (ohm) - done
-			Mat crops = image(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
-			Mat cropm = mask(Rect(0, 0, MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
-			// Solve poisson equation
-			Mat result = poisson(crops, tar, cropm);
+			//crop src the same size as mask, no boundary condition
+			Mat crops = image(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), mask.cols, mask.rows));
+			//no need to crop the mask again
+			//Mat cropm = mask(Rect(0, 0, MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
+			// Solve poisson equation using original mask
+			Mat result = poisson(crops, tar, mask);
 			result.copyTo(crops);
 			imshow("Illumination Change", image);
 		}
@@ -405,12 +476,13 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 		{
 			Mat image = target.clone();
 			Mat tar = target.clone();
-			// Crop images
-			Mat crops = image(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
 			tar = tar(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
-			Mat cropm = mask(Rect(0, 0, MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
-			// Solve poisson equation
-			Mat result = poisson(crops, tar, cropm);
+			//crop src the same size as mask, no boundary condition
+			Mat crops = image(Rect(MAX(minp.x - 5, 0), MAX(minp.y - 5, 0), mask.cols, mask.rows));
+			//no need to crop the mask again
+			//Mat cropm = mask(Rect(0, 0, MIN(mask.cols, img.cols - x), MIN(mask.rows, img.rows - y)));
+			// Solve poisson equation using original mask
+			Mat result = poisson(crops, tar, mask);
 			result.copyTo(crops);
 			imshow("Color Change", image);
 		}
@@ -451,9 +523,9 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 int main(int argc, char** argv)
 {
 	// Read the src file
-	src = imread("../Image/beach.jpg");
+	src = imread("../Image/tiles.jpg");
 	// Read the target file
-	target = imread("../Image/bird.jpg");
+	target = imread("../Image/flower.jpg");
 	// Check for invalid input
 	if (src.empty() || target.empty())
 	{
@@ -500,6 +572,7 @@ int main(int argc, char** argv)
 			break;
 		case 't':
 			e_state = SEAMLESS_TILING;
+			SeamlessTiling();
 			break;
 		}
 	}
