@@ -21,7 +21,7 @@ enum state { SEAMLESS_CLONING, MIXED_CLONING, TEXTURE_FLATTENING, ILLUMINATION, 
 
 static Mat EdgeDetector(int, void*)
 {
-	int lowThreshold = 40; //make it can be changed if have time
+	int lowThreshold = 25; //make it can be changed if have time
 						   //const int max_lowThreshold = 100;
 	const int ratio = 3;
 	const int kernel_size = 3;
@@ -40,7 +40,7 @@ static Mat EdgeDetector(int, void*)
 Mat GradientNorm(Mat img)
 {
 	//double result = 0.2;
-	//average gradient norm of f* over Ω
+	//average gradient norm of f* over O
 	Mat imgGray, gradX, gradY, gradNorm;
 	GaussianBlur(img, img, Size(3, 3), 0, 0, BORDER_DEFAULT);
 	cvtColor(img, imgGray, COLOR_BGR2GRAY);
@@ -77,7 +77,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 			{
 				p << t.at<Vec3b>(i, j)[0], t.at<Vec3b>(i, j)[1], t.at<Vec3b>(i, j)[2];
 				int n = 4;
-				if(e_state == ILLUMINATION)
+				if (e_state == ILLUMINATION)
 				{
 					gradNorm = GradientNorm(t);
 					gn = Vector3d(gradNorm.at<Vec3b>(i, j)[0], gradNorm.at<Vec3b>(i, j)[1], gradNorm.at<Vec3b>(i, j)[2]);
@@ -109,7 +109,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						else b.row(i*out.cols + j) += p - q;
 						break;
 					case TEXTURE_FLATTENING:
-						b.row(i*out.cols + j) += Vector3d(0, 0, 0);
+						b.row(i*out.cols + j) += Vector3d(0.0, 0.0, 0.0);
 						break;
 					case ILLUMINATION:
 						p1q1 = p1 - q1;
@@ -154,7 +154,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						else b.row(i*out.cols + j) += p - q;
 						break;
 					case TEXTURE_FLATTENING:
-						b.row(i*out.cols + j) += Vector3d(0, 0, 0);
+						b.row(i*out.cols + j) += Vector3d(0.0, 0.0, 0.0);
 						break;
 					case ILLUMINATION:
 						p1q1 = p1 - q1;
@@ -199,7 +199,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						else b.row(i*out.cols + j) += p - q;
 						break;
 					case TEXTURE_FLATTENING:
-						b.row(i*out.cols + j) += Vector3d(0, 0, 0);
+						b.row(i*out.cols + j) += Vector3d(0.0, 0.0, 0.0);
 						break;
 					case ILLUMINATION:
 						p1q1 = p1 - q1;
@@ -244,7 +244,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						else b.row(i*out.cols + j) += p - q;
 						break;
 					case TEXTURE_FLATTENING:
-						b.row(i*out.cols + j) += Vector3d(0,0,0);
+						b.row(i*out.cols + j) += Vector3d(0.0, 0.0, 0.0);
 						break;
 					case ILLUMINATION:
 						p1q1 = p1 - q1;
@@ -267,7 +267,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 				}
 				// Center
 				A.coeffRef(i*out.cols + j, i*out.cols + j) = n;
-				if(e_state == ILLUMINATION)
+				if (e_state == ILLUMINATION)
 					b.row(i*out.cols + j) /= 4;
 			}
 			// Known pixels
@@ -276,7 +276,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 				int n;
 				A.coeffRef(i*out.cols + j, i*out.cols + j) = 1;
 				p << s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2];
-				if(e_state == TEXTURE_FLATTENING)
+				if (e_state == TEXTURE_FLATTENING)
 				{
 					n = 4;
 					//up
@@ -285,7 +285,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 					else
 					{
 						Vector3d q(t.at<Vec3b>(i - 1, j)[0], t.at<Vec3b>(i - 1, j)[1], t.at<Vec3b>(i - 1, j)[2]);
-						
+
 						b.row(i*out.cols + j) += q + p - q;
 					}
 					//down
@@ -317,25 +317,25 @@ Mat poisson(Mat s, Mat t, Mat ma)
 				else
 					b.row(i*out.cols + j) = p;
 			}
-			if(e_state == SEAMLESS_TILING)
+			if (e_state == SEAMLESS_TILING)
 			{
 				p = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
-				if(i < 10)
+				if (i < 10)
 				{
 					Vector3d q(s.at<Vec3b>(out.rows - i, j)[0], s.at<Vec3b>(out.rows - i, j)[1], s.at<Vec3b>(out.rows - i, j)[2]);
 					b.row(i*out.cols + j) = (p + q) / 2;
 				}
-				else if(i >= out.rows - 10)
+				else if (i >= out.rows - 10)
 				{
 					Vector3d q(s.at<Vec3b>(out.rows - i, j)[0], s.at<Vec3b>(out.rows - i, j)[1], s.at<Vec3b>(out.rows - i, j)[2]);
 					b.row(i*out.cols + j) = (p + q) / 2;
 				}
-				if(j < 10)
+				if (j < 10)
 				{
 					Vector3d q(s.at<Vec3b>(i, out.cols - j)[0], s.at<Vec3b>(i, out.cols - j)[1], s.at<Vec3b>(i, out.cols - j)[2]);
 					b.row(i*out.cols + j) = (p + q) / 2;
 				}
-				else if(j >= out.cols - 10)
+				else if (j >= out.cols - 10)
 				{
 					Vector3d q(s.at<Vec3b>(i, out.cols - j)[0], s.at<Vec3b>(i, out.cols - j)[1], s.at<Vec3b>(i, out.cols - j)[2]);
 					b.row(i*out.cols + j) = (p + q) / 2;
@@ -355,7 +355,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 			for (int k = 0; k < 3; k++)
 				// Deal with overflow
 				out.at<Vec3b>(i, j)[k] = MAX(MIN(x(i * out.cols + j, k), 255), 0);
-				
+
 
 	return out;
 }
@@ -367,12 +367,29 @@ void TextureFlattening()
 	for (int i = 0; i < mask1.rows; i++)
 		for (int j = 0; j < mask1.cols; j++)
 		{
-			if (mask1.at<uchar>(i, j) == 255)
-				mask1.at<uchar>(i, j) = 0;
-			else if (mask1.at<uchar>(i, j) == 0)
+			if (mask1.at<uchar>(i, j) == 0)
 				mask1.at<uchar>(i, j) = 255;
+			else if (mask1.at<uchar>(i, j) == 255)
+			{
+				mask1.at<uchar>(i, j) = 0;
+				for (int k = 0; k < 2; k++)
+				{
+					if (j > k && j < mask1.cols - k)
+					{
+						mask1.at<uchar>(i, j + k) = 0;
+						mask1.at<uchar>(i, j - k) = 0;
+					}
+					if (i > k && i < mask1.rows - k)
+					{
+						mask1.at<uchar>(i + k, j) = 0;
+						mask1.at<uchar>(i - k, j) = 0;
+					}
+				}
+			}
 		}
-	Mat result = poisson(src, dest, mask1);
+	Mat result;
+	result = poisson(src, dest, mask1);
+	//textureFlattening(dest, mask1, result, 40, 50, 3);
 	imshow("Texture Flatten", result);
 }
 
@@ -384,17 +401,17 @@ void SeamlessTiling()
 	imshow("result", result);
 
 	Mat newImg;
-	for(int i=0; i < 2; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		Mat copyImg = result.clone();
 		vconcat(result, copyImg, newImg);
-		for(int j = 0; j < 2; j++)
+		for (int j = 0; j < 2; j++)
 		{
 			Mat copyImg = newImg.clone();
 			hconcat(newImg, copyImg, newImg);
 		}
 	}
-	
+
 	imshow("Seamless Tiling", newImg);
 }
 
@@ -429,7 +446,7 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 			result.copyTo(crops);
 			imshow("Cloning", image);
 		}
-		if(e_state == ILLUMINATION)
+		if (e_state == ILLUMINATION)
 		{
 			Mat image = target.clone();
 			Mat tar = target.clone();
@@ -443,7 +460,7 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 			result.copyTo(crops);
 			imshow("Illumination Change", image);
 		}
-		if(e_state == COLOR)
+		if (e_state == COLOR)
 		{
 			Mat image = target.clone();
 			Mat tar = target.clone();
@@ -494,7 +511,7 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 int main(int argc, char** argv)
 {
 	// Read the src file
-	src = imread("../Image/water.png");
+	src = imread("../Image/boy.jpg");
 	// Read the target file
 	target = imread("../Image/flower.jpg");
 	// Check for invalid input
