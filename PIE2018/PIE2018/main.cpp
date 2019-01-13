@@ -17,8 +17,10 @@ vector<vector<Point>> contours;
 vector<Point> pts;
 Point minp, maxp;
 
+//State
 enum state { SEAMLESS_CLONING, MIXED_CLONING, TEXTURE_FLATTENING, ILLUMINATION, COLOR, SEAMLESS_TILING } e_state;
 
+//Canny Edge Detection for Texture Flattening
 static Mat EdgeDetector(int, void*)
 {
 	int lowThreshold = 25; //make it can be changed if have time
@@ -34,10 +36,11 @@ static Mat EdgeDetector(int, void*)
 	dst = Scalar::all(0);
 	src.copyTo(dst, edgeMask);
 	imshow("Edge Mask", edgeMask);
-	imwrite("../Image/Canny_Edge.jpg", edgeMask);
+	//imwrite("../Image/Canny_Edge.jpg", edgeMask);
 	return edgeMask;
 }
 
+//Gradient Norm Claculation for Illumination
 Mat GradientNorm(Mat img)
 {
 	//double result = 0.2;
@@ -62,9 +65,6 @@ Mat poisson(Mat s, Mat t, Mat ma)
 	SimplicialCholesky<SparseMatrix<double>> solver;
 	MatrixXd b = MatrixXd::Zero(out.cols * out.rows, 3);
 	MatrixXd x(out.cols * out.rows, 3);
-	/*Mat grad;
-	Laplacian(src, grad, CV_16S, 3);
-	imshow("Laplacian", grad);*/
 
 	for (int i = 0; i < out.rows; i++)
 	{
@@ -78,6 +78,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 			{
 				p << t.at<Vec3b>(i, j)[0], t.at<Vec3b>(i, j)[1], t.at<Vec3b>(i, j)[2];
 				int n = 4;
+				//Calculation of illumination gradient
 				if (e_state == ILLUMINATION)
 				{
 					gradNorm = GradientNorm(t);
@@ -268,6 +269,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 				}
 				// Center
 				A.coeffRef(i*out.cols + j, i*out.cols + j) = n;
+				//If Illumination
 				if (e_state == ILLUMINATION)
 					b.row(i*out.cols + j) /= 4;
 			}
@@ -277,6 +279,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 				int n;
 				A.coeffRef(i*out.cols + j, i*out.cols + j) = 1;
 				p << s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2];
+				//Texture Flattening Only
 				if (e_state == TEXTURE_FLATTENING)
 				{
 					n = 4;
@@ -321,11 +324,13 @@ Mat poisson(Mat s, Mat t, Mat ma)
 			if (e_state == SEAMLESS_TILING)
 			{
 				p = Vector3d(s.at<Vec3b>(i, j)[0], s.at<Vec3b>(i, j)[1], s.at<Vec3b>(i, j)[2]);
+				//Up
 				if (i < 10)
 				{
 					Vector3d q(s.at<Vec3b>(out.rows - i, j)[0], s.at<Vec3b>(out.rows - i, j)[1], s.at<Vec3b>(out.rows - i, j)[2]);
 					b.row(i*out.cols + j) += (p + q) / 2;
 				}
+				//Down
 				else if (i >= out.rows - 10)
 				{
 					Vector3d q(s.at<Vec3b>(out.rows - i, j)[0], s.at<Vec3b>(out.rows - i, j)[1], s.at<Vec3b>(out.rows - i, j)[2]);
@@ -333,17 +338,20 @@ Mat poisson(Mat s, Mat t, Mat ma)
 				}
 				else
 					b.row(i*out.cols + j) += p;
+				//Left
 				if (j < 10)
 				{
 					Vector3d q(s.at<Vec3b>(i, out.cols - j)[0], s.at<Vec3b>(i, out.cols - j)[1], s.at<Vec3b>(i, out.cols - j)[2]);
 					b.row(i*out.cols + j) += (p + q) / 2;
 				}
+				//Right
 				else if (j >= out.cols - 10)
 				{
 					Vector3d q(s.at<Vec3b>(i, out.cols - j)[0], s.at<Vec3b>(i, out.cols - j)[1], s.at<Vec3b>(i, out.cols - j)[2]);
 					b.row(i*out.cols + j) += (p + q) / 2;
 				}
 				else
+					//Center
 					b.row(i*out.cols + j) += p;
 				A.coeffRef(i*out.cols + j, i*out.cols + j) = 4;
 			}
@@ -394,7 +402,6 @@ void TextureFlattening()
 	result = poisson(src, dest, mask1);
 	//textureFlattening(dest, mask1, result, 40, 50, 3);
 	imshow("Texture Flatten", result);
-	//imwrite("../Image/girl_texture.jpg", result);
 }
 
 void SeamlessTiling()
@@ -403,7 +410,6 @@ void SeamlessTiling()
 	Mat dest = src.clone();
 	//Mat result = src.clone();
 	Mat result = poisson(img, dest, dest);
-	//imshow("result", result);
 
 	Mat newImg;
 	for (int i = 0; i < 2; i++)
@@ -416,7 +422,6 @@ void SeamlessTiling()
 			hconcat(newImg, copyImg, newImg);
 		}
 	}
-	imwrite("../Image/Tiling.jpg", newImg);
 	imshow("Seamless Tiling", newImg);
 }
 
@@ -464,7 +469,6 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 			Mat result = poisson(crops, tar, mask);
 			result.copyTo(crops);
 			imshow("Illumination Change", image);
-			//imwrite("../Image/Illumination.jpg", image);
 		}
 		if (e_state == COLOR)
 		{
@@ -479,7 +483,6 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 			Mat result = poisson(crops, tar, mask);
 			result.copyTo(crops);
 			imshow("Color Change", image);
-			//imwrite("../Image/Color.jpg", image);
 		}
 	}
 
@@ -515,12 +518,26 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 		pts.emplace_back(Point(x, y));
 	}
 }
+//Guide to user
+void PrintMenu()
+{
+	cout << "Main Menu" << endl;
+	cout << "n - Seamless Cloning" << endl;
+	cout << "m - Mixed Seamless Cloning" << endl;
+	cout << "e - Texture Flattening" << endl;
+	cout << "i - Local Illumination Change" << endl;
+	cout << "c - Local Color Change" << endl;
+	cout << "t - Seamless Tiling" << endl;
+	cout << "Esc - Exit Application" << endl;
+	cout << "What would you like to do?" << endl;
+}
+
 int main(int argc, char** argv)
 {
 	// Read the src file
-	src = imread("../Image/water.png");
+	src = imread("../Image/beach.jpg");
 	// Read the target file
-	target = imread("../Image/flower.jpg");
+	target = imread("../Image/bird.jpg");
 	// Check for invalid input
 	if (src.empty() || target.empty())
 	{
@@ -532,6 +549,7 @@ int main(int argc, char** argv)
 	imshow("roi", roi);
 	// Show background
 	imshow("src", src);
+	PrintMenu();
 	while (1)
 	{
 		switch (waitKey(0))
@@ -543,30 +561,78 @@ int main(int argc, char** argv)
 			// Mixed gradient
 		case 'm':
 			e_state = MIXED_CLONING;
+			//Destroy All Windows
+			cvDestroyAllWindows();
+			// Read the src file
+			src = imread("../Image/beach.jpg");
+			// Read the target file
+			target = imread("../Image/bird.jpg");
+			roi = target.clone();
+			// Show target to select roi
+			imshow("roi", roi);
+			// Show background
+			imshow("src", src);
 			setMouseCallback("roi", onMouse, &roi);
 			setMouseCallback("src", onMouse, &src);
 			break;
 			// No mixed gradient
 		case 'n':
 			e_state = SEAMLESS_CLONING;
+			//Destroy All Windows
+			cvDestroyAllWindows();
+			// Read the src file
+			src = imread("../Image/2.jpg");
+			// Read the target file
+			target = imread("../Image/bird.jpg");
+			roi = target.clone();
+			// Show target to select roi
+			imshow("roi", roi);
+			// Show background
+			imshow("src", src);
 			setMouseCallback("roi", onMouse, &roi);
 			setMouseCallback("src", onMouse, &src);
 			break;
 			// Edge Detector
 		case 'e':
 			e_state = TEXTURE_FLATTENING;
+			//Destroy All Windows
+			cvDestroyAllWindows();
+			// Read the src file
+			src = imread("../Image/girl.jpg");
+			// Show background
+			imshow("src", src);
 			TextureFlattening();
 			break;
 		case 'i':
 			e_state = ILLUMINATION;
+			//Destroy All Windows
+			cvDestroyAllWindows();
+			// Read the target file
+			target = imread("../Image/banana.jpg");
+			roi = target.clone();
+			// Show target
+			imshow("roi", roi);
 			setMouseCallback("roi", onMouse, &roi);
 			break;
 		case 'c':
 			e_state = COLOR;
+			//Destroy All Windows
+			cvDestroyAllWindows();
+			// Read the target file
+			target = imread("../Image/flower.jpg");
+			roi = target.clone();
+			// Show target
+			imshow("roi", roi);
 			setMouseCallback("roi", onMouse, &roi);
 			break;
 		case 't':
 			e_state = SEAMLESS_TILING;
+			//Destroy All Windows
+			cvDestroyAllWindows();
+			// Read the src file
+			src = imread("../Image/water.png");
+			// Show background
+			imshow("src", src);
 			SeamlessTiling();
 			break;
 		}
