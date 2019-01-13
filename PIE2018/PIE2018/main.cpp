@@ -34,6 +34,7 @@ static Mat EdgeDetector(int, void*)
 	dst = Scalar::all(0);
 	src.copyTo(dst, edgeMask);
 	imshow("Edge Mask", edgeMask);
+	imwrite("../Image/Canny_Edge.jpg", edgeMask);
 	return edgeMask;
 }
 
@@ -285,7 +286,6 @@ Mat poisson(Mat s, Mat t, Mat ma)
 					else
 					{
 						Vector3d q(t.at<Vec3b>(i - 1, j)[0], t.at<Vec3b>(i - 1, j)[1], t.at<Vec3b>(i - 1, j)[2]);
-
 						b.row(i*out.cols + j) += q + p - q;
 					}
 					//down
@@ -312,7 +312,8 @@ Mat poisson(Mat s, Mat t, Mat ma)
 						Vector3d q(t.at<Vec3b>(i, j + 1)[0], t.at<Vec3b>(i, j + 1)[1], t.at<Vec3b>(i, j + 1)[2]);
 						b.row(i*out.cols + j) += q + p - q;
 					}
-					b.row(i*out.cols + j) /= 4;
+					A.coeffRef(i*out.cols + j, i*out.cols + j) = n;
+					//b.row(i*out.cols + j) /= 4;
 				}
 				else
 					b.row(i*out.cols + j) = p;
@@ -323,26 +324,28 @@ Mat poisson(Mat s, Mat t, Mat ma)
 				if (i < 10)
 				{
 					Vector3d q(s.at<Vec3b>(out.rows - i, j)[0], s.at<Vec3b>(out.rows - i, j)[1], s.at<Vec3b>(out.rows - i, j)[2]);
-					b.row(i*out.cols + j) = (p + q) / 2;
+					b.row(i*out.cols + j) += (p + q) / 2;
 				}
 				else if (i >= out.rows - 10)
 				{
 					Vector3d q(s.at<Vec3b>(out.rows - i, j)[0], s.at<Vec3b>(out.rows - i, j)[1], s.at<Vec3b>(out.rows - i, j)[2]);
-					b.row(i*out.cols + j) = (p + q) / 2;
+					b.row(i*out.cols + j) += (p + q) / 2;
 				}
+				else
+					b.row(i*out.cols + j) += p;
 				if (j < 10)
 				{
 					Vector3d q(s.at<Vec3b>(i, out.cols - j)[0], s.at<Vec3b>(i, out.cols - j)[1], s.at<Vec3b>(i, out.cols - j)[2]);
-					b.row(i*out.cols + j) = (p + q) / 2;
+					b.row(i*out.cols + j) += (p + q) / 2;
 				}
 				else if (j >= out.cols - 10)
 				{
 					Vector3d q(s.at<Vec3b>(i, out.cols - j)[0], s.at<Vec3b>(i, out.cols - j)[1], s.at<Vec3b>(i, out.cols - j)[2]);
-					b.row(i*out.cols + j) = (p + q) / 2;
+					b.row(i*out.cols + j) += (p + q) / 2;
 				}
 				else
-					b.row(i*out.cols + j) = p;
-				A.coeffRef(i*out.cols + j, i*out.cols + j) = 1;
+					b.row(i*out.cols + j) += p;
+				A.coeffRef(i*out.cols + j, i*out.cols + j) = 4;
 			}
 		}
 	}
@@ -391,14 +394,16 @@ void TextureFlattening()
 	result = poisson(src, dest, mask1);
 	//textureFlattening(dest, mask1, result, 40, 50, 3);
 	imshow("Texture Flatten", result);
+	//imwrite("../Image/girl_texture.jpg", result);
 }
 
 void SeamlessTiling()
 {
 	Mat img = src.clone();
 	Mat dest = src.clone();
+	//Mat result = src.clone();
 	Mat result = poisson(img, dest, dest);
-	imshow("result", result);
+	//imshow("result", result);
 
 	Mat newImg;
 	for (int i = 0; i < 2; i++)
@@ -411,7 +416,7 @@ void SeamlessTiling()
 			hconcat(newImg, copyImg, newImg);
 		}
 	}
-
+	imwrite("../Image/Tiling.jpg", newImg);
 	imshow("Seamless Tiling", newImg);
 }
 
@@ -459,6 +464,7 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 			Mat result = poisson(crops, tar, mask);
 			result.copyTo(crops);
 			imshow("Illumination Change", image);
+			//imwrite("../Image/Illumination.jpg", image);
 		}
 		if (e_state == COLOR)
 		{
@@ -473,6 +479,7 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 			Mat result = poisson(crops, tar, mask);
 			result.copyTo(crops);
 			imshow("Color Change", image);
+			//imwrite("../Image/Color.jpg", image);
 		}
 	}
 
@@ -511,7 +518,7 @@ void onMouse(int event, int x, int y, int flags, void* userdata)
 int main(int argc, char** argv)
 {
 	// Read the src file
-	src = imread("../Image/boy.jpg");
+	src = imread("../Image/water.png");
 	// Read the target file
 	target = imread("../Image/flower.jpg");
 	// Check for invalid input
