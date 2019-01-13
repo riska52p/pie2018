@@ -331,7 +331,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 					b.row(i*out.cols + j) += (p + q) / 2;
 				}
 				//Down
-				else if (i >= out.rows - 10)
+				else if (i > out.rows - 10)
 				{
 					Vector3d q(s.at<Vec3b>(out.rows - i, j)[0], s.at<Vec3b>(out.rows - i, j)[1], s.at<Vec3b>(out.rows - i, j)[2]);
 					b.row(i*out.cols + j) += (p + q) / 2;
@@ -345,7 +345,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 					b.row(i*out.cols + j) += (p + q) / 2;
 				}
 				//Right
-				else if (j >= out.cols - 10)
+				else if (j > out.cols - 10)
 				{
 					Vector3d q(s.at<Vec3b>(i, out.cols - j)[0], s.at<Vec3b>(i, out.cols - j)[1], s.at<Vec3b>(i, out.cols - j)[2]);
 					b.row(i*out.cols + j) += (p + q) / 2;
@@ -353,7 +353,7 @@ Mat poisson(Mat s, Mat t, Mat ma)
 				else
 					//Center
 					b.row(i*out.cols + j) += p;
-				A.coeffRef(i*out.cols + j, i*out.cols + j) = 4;
+				A.coeffRef(i*out.cols + j, i*out.cols + j) = 3;
 			}
 		}
 	}
@@ -564,7 +564,7 @@ int main(int argc, char** argv)
 			//Destroy All Windows
 			cvDestroyAllWindows();
 			// Read the src file
-			src = imread("../Image/beach.jpg");
+			src = imread("../Image/2.jpg");
 			// Read the target file
 			target = imread("../Image/bird.jpg");
 			roi = target.clone();
@@ -581,7 +581,7 @@ int main(int argc, char** argv)
 			//Destroy All Windows
 			cvDestroyAllWindows();
 			// Read the src file
-			src = imread("../Image/2.jpg");
+			src = imread("../Image/beach.jpg");
 			// Read the target file
 			target = imread("../Image/bird.jpg");
 			roi = target.clone();
@@ -630,7 +630,7 @@ int main(int argc, char** argv)
 			//Destroy All Windows
 			cvDestroyAllWindows();
 			// Read the src file
-			src = imread("../Image/water.png");
+			src = imread("../Image/tile.jpg");
 			// Show background
 			imshow("src", src);
 			SeamlessTiling();
